@@ -741,8 +741,26 @@ const DEFAULT_PRODUCTS = [
 ];
 
 const EMOJIS = ['🔧','✂️','🩺','🔬','💉','🧤','🦴','🔩','💡','⚙️','🧵','📏','🪡','🔨','👂','🔴','🏥','⚗️','📋','🩹'];
-const CAT_LABELS = {general:'General Surgical',orthopedic:'Orthopedic',disposables:'Disposables',ot:'OT Equipment',diagnostic:'Diagnostic',specialty:'Specialty',supports:'Supports & Braces'};
-const CAT_COLORS = {general:'general',orthopedic:'orthopedic',disposables:'disposables',ot:'ot',diagnostic:'diagnostic',specialty:'specialty'};
+
+// ✅ FIXED: Added supports category
+const CAT_LABELS = {
+  general:'General Surgical',
+  orthopedic:'Orthopedic',
+  disposables:'Disposables',
+  ot:'OT Equipment',
+  diagnostic:'Diagnostic',
+  specialty:'Specialty',
+  supports:'Supports & Braces'
+};
+const CAT_COLORS = {
+  general:'general',
+  orthopedic:'orthopedic',
+  disposables:'disposables',
+  ot:'ot',
+  diagnostic:'diagnostic',
+  specialty:'specialty',
+  supports:'supports'
+};
 
 // ═══ STATE ═══
 let products = [];
@@ -750,9 +768,8 @@ let currentPage = 1;
 const PER_PAGE = 10;
 let confirmCallback = null;
 
-// REST API configuration
-// const API_URL = "http://localhost:5000/api";
-const API_URL = "https://hr-work.onrender.com";
+// ✅ FIXED: Base URL without /api — added per call below
+const API_URL = "https://hr-work.onrender.com/api";
 
 // Helper to get authorization headers
 function getAuthHeaders() {
@@ -763,7 +780,7 @@ function getAuthHeaders() {
   };
 }
 
-// Check auth status on load
+// Check auth status
 function checkAuth() {
   const token = sessionStorage.getItem('hrwork_token');
   if (!token) {
@@ -788,7 +805,8 @@ function hideOverlay() {
   if (overlay) overlay.classList.remove('active');
 }
 
-// ═══ LOAD DATA ═══
+// ═══ LOAD PRODUCTS ═══
+// ✅ FIXED: /api/products
 async function loadProducts() {
   if (!checkAuth()) return;
   try {
@@ -803,19 +821,20 @@ async function loadProducts() {
 }
 
 function nextId() {
-  return products.length ? Math.max(...products.map(p=>p.id)) + 1 : 1;
+  return products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
 }
 
 // ═══ AUTH ═══
+// ✅ FIXED: /api/auth/login
 async function doLogin() {
   const u = document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value;
-  
+
   if (!u || !p) {
-    toast('Username and password are required.','error');
+    toast('Username and password are required.', 'error');
     return;
   }
-  
+
   showOverlay("Signing in...");
   try {
     const res = await fetch(`${API_URL}/auth/login`, {
@@ -823,12 +842,10 @@ async function doLogin() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: u, password: p })
     });
-    
+
     const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.msg || "Incorrect username or password");
-    }
-    
+    if (!res.ok) throw new Error(data.msg || "Incorrect username or password");
+
     sessionStorage.setItem('hrwork_token', data.token);
     sessionStorage.setItem('hrwork_admin', '1');
     document.getElementById('loginError').style.display = 'none';
@@ -860,25 +877,23 @@ function showAdmin() {
   loadProducts();
 }
 
-// auto-login if session active
+// Auto-login if session active
 window.addEventListener('DOMContentLoaded', () => {
-  if (sessionStorage.getItem('hrwork_token')) {
-    showAdmin();
-  }
-  document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-  document.getElementById('loginUser').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('loginPass').focus(); });
+  if (sessionStorage.getItem('hrwork_token')) showAdmin();
+  document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
 });
 
 // ═══ NAVIGATION ═══
 function navTo(sec, linkEl) {
-  document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('sec-'+sec).classList.add('active');
-  document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + sec).classList.add('active');
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
   if (linkEl) linkEl.classList.add('active');
-  const titles = {dashboard:'Dashboard',manage:'Manage Products',add:'Add New Product',settings:'Settings'};
+  const titles = { dashboard: 'Dashboard', manage: 'Manage Products', add: 'Add New Product', settings: 'Settings' };
   document.getElementById('pageTitle').textContent = titles[sec] || sec;
-  if (sec==='dashboard') refreshDashboard();
-  if (sec==='manage') { currentPage=1; renderTable(); }
+  if (sec === 'dashboard') refreshDashboard();
+  if (sec === 'manage') { currentPage = 1; renderTable(); }
   closeSidebar();
 }
 
@@ -892,9 +907,8 @@ function refreshAll() {
 // ═══ DASHBOARD ═══
 function refreshDashboard() {
   document.getElementById('sidebarCount').textContent = products.length;
-  // Stats
   const cats = Object.keys(CAT_LABELS);
-  const sterileCount = products.filter(p=>p.sterile==='Sterile').length;
+  const sterileCount = products.filter(p => p.sterile === 'Sterile').length;
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card">
       <div class="stat-card-top"><div class="stat-icon blue">📦</div></div>
@@ -903,7 +917,7 @@ function refreshDashboard() {
     </div>
     <div class="stat-card">
       <div class="stat-card-top"><div class="stat-icon gold">🗂️</div></div>
-      <div class="stat-num">${cats.filter(c=>products.some(p=>p.cat===c)).length}</div>
+      <div class="stat-num">${cats.filter(c => products.some(p => p.cat === c)).length}</div>
       <div class="stat-label">Active Categories</div>
     </div>
     <div class="stat-card">
@@ -917,69 +931,67 @@ function refreshDashboard() {
       <div class="stat-label">Non-Sterile Products</div>
     </div>
   `;
-  // Category bars
-  const max = Math.max(...cats.map(c=>products.filter(p=>p.cat===c).length), 1);
-  document.getElementById('catBars').innerHTML = cats.map(c=>{
-    const count = products.filter(p=>p.cat===c).length;
-    const pct = Math.round((count/max)*100);
+  const max = Math.max(...cats.map(c => products.filter(p => p.cat === c).length), 1);
+  document.getElementById('catBars').innerHTML = cats.map(c => {
+    const count = products.filter(p => p.cat === c).length;
+    const pct = Math.round((count / max) * 100);
     return `<div class="cat-bar-item">
       <div class="cat-bar-top"><span>${CAT_LABELS[c]}</span><span>${count}</span></div>
       <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
     </div>`;
   }).join('');
-  // Recent
   const recent = [...products].slice(-5).reverse();
-  document.getElementById('recentList').innerHTML = recent.length ? recent.map(p=>`
+  document.getElementById('recentList').innerHTML = recent.length ? recent.map(p => `
     <div class="recent-item">
       <div class="recent-item-icon" style="overflow:hidden;display:flex;align-items:center;justify-content:center;">
-        ${(Array.isArray(p.images) && p.images.length > 0) ? `<img src="${p.images[0]}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">` : p.icon||'📦'}
+        ${(Array.isArray(p.images) && p.images.length > 0)
+          ? `<img src="${p.images[0]}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`
+          : p.icon || '📦'}
       </div>
       <div class="recent-item-info">
         <div class="recent-item-name">${p.name}</div>
-        <div class="recent-item-cat">${CAT_LABELS[p.cat]||p.cat}</div>
+        <div class="recent-item-cat">${CAT_LABELS[p.cat] || p.cat}</div>
       </div>
-      <span class="recent-item-badge">${p.moq||'—'}</span>
+      <span class="recent-item-badge">${p.moq || '—'}</span>
     </div>`).join('') : '<p style="color:var(--gray-400);font-size:14px">No products yet.</p>';
 }
 
+// ═══ TABLE ═══
 function renderTable() {
-  const query = document.getElementById('manageSearch').value.toLowerCase();
-  const filterCat = document.getElementById('manageFilter').value;
-  
+  const query = (document.getElementById('manageSearch')?.value || '').toLowerCase();
+  const filterCat = document.getElementById('manageFilter')?.value || 'all';
+
   let list = products;
-  if (filterCat !== 'all') {
-    list = list.filter(p => p.cat === filterCat);
-  }
-  if (query) {
-    list = list.filter(p => p.name.toLowerCase().includes(query) || (p.desc && p.desc.toLowerCase().includes(query)));
-  }
-  
+  if (filterCat !== 'all') list = list.filter(p => p.cat === filterCat);
+  if (query) list = list.filter(p => p.name.toLowerCase().includes(query) || (p.desc || '').toLowerCase().includes(query));
+
   const total = list.length;
-  const totalPages = Math.ceil(total / PER_PAGE);
-  if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
-  
+  const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+  if (currentPage > totalPages) currentPage = 1;
   const start = (currentPage - 1) * PER_PAGE;
   const pageItems = list.slice(start, start + PER_PAGE);
 
-  document.getElementById('manageSubtitle').textContent = `${total} product${total!==1?'s':''} found`;
-  document.getElementById('paginationInfo').textContent = total ? `Showing ${start+1}–${Math.min(start+PER_PAGE,total)} of ${total}` : 'No products';
+  document.getElementById('manageSubtitle').textContent = `${total} product${total !== 1 ? 's' : ''} found`;
+  document.getElementById('paginationInfo').textContent = total
+    ? `Showing ${start + 1}–${Math.min(start + PER_PAGE, total)} of ${total}`
+    : 'No products';
 
   const tbody = document.getElementById('productTableBody');
   if (!pageItems.length) {
     tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📭</div><h3>No products found</h3><p>Try adjusting your search or filter.</p></div></td></tr>`;
   } else {
-    tbody.innerHTML = pageItems.map((p,i)=>{
-      const sterileClass = p.sterile==='Sterile'?'yes':p.sterile==='N/A'?'na':'no';
+    tbody.innerHTML = pageItems.map((p, i) => {
+      const sterileClass = p.sterile === 'Sterile' ? 'yes' : p.sterile === 'N/A' ? 'na' : 'no';
       const imgHtml = (Array.isArray(p.images) && p.images.length > 0)
         ? `<img src="${p.images[0]}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`
         : p.icon || '📦';
       return `<tr>
-        <td style="color:var(--gray-400);font-size:13px">${start+i+1}</td>
+        <td style="color:var(--gray-400);font-size:13px">${start + i + 1}</td>
         <td><div class="prod-icon-cell" style="overflow:hidden;display:flex;align-items:center;justify-content:center;">${imgHtml}</div></td>
         <td><strong style="color:var(--navy);font-size:14px">${p.name}</strong></td>
-        <td><span class="cat-pill ${CAT_COLORS[p.cat]||''}">${CAT_LABELS[p.cat]||p.cat}</span></td>
-        <td style="font-size:13px;color:var(--gray-600)">${p.moq||'—'}</td>
-        <td><span class="sterile-badge ${sterileClass}">${p.sterile||'—'}</span></td>
+        <td><span class="cat-pill ${CAT_COLORS[p.cat] || ''}">${CAT_LABELS[p.cat] || p.cat}</span></td>
+        <td style="font-size:13px;color:var(--gray-600)">${p.moq || '—'}</td>
+        <td><span class="sterile-badge ${sterileClass}">${p.sterile || '—'}</span></td>
         <td><div class="actions-cell">
           <button class="btn btn-outline btn-sm btn-icon" onclick="openEditModal(${p.id})" title="Edit">✏️</button>
           <button class="btn btn-danger btn-sm btn-icon" onclick="deleteProduct(${p.id},'${escHtml(p.name)}')" title="Delete">🗑️</button>
@@ -988,22 +1000,23 @@ function renderTable() {
     }).join('');
   }
 
-  // Pagination buttons
   const pBtns = document.getElementById('pageBtns');
-  if (totalPages <= 1) { pBtns.innerHTML=''; return; }
-  let btns = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
-  for(let i=1;i<=totalPages;i++) {
-    if (i===1||i===totalPages||Math.abs(i-currentPage)<=1) btns+=`<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
-    else if (Math.abs(i-currentPage)===2) btns+=`<span style="padding:0 4px;color:var(--gray-400)">…</span>`;
+  if (totalPages <= 1) { pBtns.innerHTML = ''; return; }
+  let btns = `<button class="page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1)
+      btns += `<button class="page-btn${i === currentPage ? ' active' : ''}" onclick="goPage(${i})">${i}</button>`;
+    else if (Math.abs(i - currentPage) === 2)
+      btns += `<span style="padding:0 4px;color:var(--gray-400)">…</span>`;
   }
-  btns+=`<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>›</button>`;
+  btns += `<button class="page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>›</button>`;
   pBtns.innerHTML = btns;
 }
 
-function goPage(n) { currentPage=n; renderTable(); }
-function escHtml(s) { return (s||'').replace(/'/g,"\\'"); }
+function goPage(n) { currentPage = n; renderTable(); }
+function escHtml(s) { return (s || '').replace(/'/g, "\\'"); }
 
-// ═══ GLOBAL FOR UPLOADED IMAGES ═══
+// ═══ IMAGE UPLOAD ═══
 let addUploadedImages = [];
 let editUploadedImages = [];
 
@@ -1011,28 +1024,48 @@ function handleImageUpload(event, mode) {
   const files = Array.from(event.target.files);
   const maxAllowed = 5;
   const currentImages = mode === 'add' ? addUploadedImages : editUploadedImages;
-  
+
   if (currentImages.length + files.length > maxAllowed) {
     toast(`❌ You can only upload up to ${maxAllowed} images per product.`, 'error');
     event.target.value = '';
     return;
   }
-  
+
   let loadedCount = 0;
   files.forEach(file => {
     if (!file.type.startsWith('image/')) {
       toast('❌ Only image files are allowed.', 'error');
       return;
     }
-    
+
+    // ── COMPRESS BEFORE STORING ──
     const reader = new FileReader();
     reader.onload = function(e) {
-      currentImages.push(e.target.result);
-      loadedCount++;
-      if (loadedCount === files.length) {
-        renderImagePreviews(mode);
-        event.target.value = '';
-      }
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+
+        // Max 800px wide, keep aspect ratio
+        const MAX = 800;
+        let w = img.width;
+        let h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+
+        // Compress to JPEG at 70% quality
+        const compressed = canvas.toDataURL('image/jpeg', 0.7);
+        currentImages.push(compressed);
+        loadedCount++;
+        if (loadedCount === files.length) {
+          renderImagePreviews(mode);
+          event.target.value = '';
+        }
+      };
+      img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   });
@@ -1041,22 +1074,18 @@ function handleImageUpload(event, mode) {
 function renderImagePreviews(mode) {
   const container = document.getElementById(mode === 'add' ? 'add-images-preview' : 'edit-images-preview');
   const images = mode === 'add' ? addUploadedImages : editUploadedImages;
-  
   if (!container) return;
-  container.innerHTML = images.map((imgBase64, index) => `
+  container.innerHTML = images.map((img, index) => `
     <div class="preview-thumb-container">
-      <img src="${imgBase64}" alt="Preview ${index + 1}">
+      <img src="${img}" alt="Preview ${index + 1}">
       <button type="button" class="preview-thumb-remove" onclick="removeUploadedImage('${mode}', ${index})">×</button>
     </div>
   `).join('');
 }
 
 function removeUploadedImage(mode, index) {
-  if (mode === 'add') {
-    addUploadedImages.splice(index, 1);
-  } else {
-    editUploadedImages.splice(index, 1);
-  }
+  if (mode === 'add') addUploadedImages.splice(index, 1);
+  else editUploadedImages.splice(index, 1);
   renderImagePreviews(mode);
 }
 
@@ -1070,52 +1099,43 @@ function toggleCustomSizeInput(mode) {
 }
 
 // ═══ ADD PRODUCT ═══
+// ✅ FIXED: /api/products
 async function addProduct() {
   const name = document.getElementById('add-name').value.trim();
   const cat = document.getElementById('add-cat').value;
   const desc = document.getElementById('add-desc').value.trim();
-  if (!name) { toast('Product name is required.','error'); return; }
-  if (!cat) { toast('Please select a category.','error'); return; }
-  if (!desc) { toast('Description is required.','error'); return; }
+  if (!name) { toast('Product name is required.', 'error'); return; }
+  if (!cat) { toast('Please select a category.', 'error'); return; }
+  if (!desc) { toast('Description is required.', 'error'); return; }
 
   const sizeCheckboxes = document.querySelectorAll('input[name="add-sizes"]:checked');
   let sizes = Array.from(sizeCheckboxes).map(cb => {
-    if (cb.value === 'Custom') {
-      return document.getElementById('add-size-custom').value.trim();
-    }
+    if (cb.value === 'Custom') return document.getElementById('add-size-custom').value.trim();
     return cb.value;
   }).filter(s => s !== '');
   if (sizes.length === 0) sizes = ['Universal'];
 
-  const material = document.getElementById('add-material').value.trim();
+  const material = document.getElementById('add-material')?.value.trim() || '';
   const sterile = document.getElementById('add-sterile').value;
-  const spec = document.getElementById('add-spec') ? document.getElementById('add-spec').value.trim() : '';
-  const moq = document.getElementById('add-moq').value.trim();
-  const packaging = document.getElementById('add-packaging').value.trim();
+  const spec = document.getElementById('add-spec')?.value.trim() || '';
+  const moq = document.getElementById('add-moq')?.value.trim() || '';
+  const packaging = document.getElementById('add-packaging')?.value.trim() || '';
 
-  showOverlay("Uploading images to CDN & saving product...");
+  showOverlay("Uploading images & saving product...");
   try {
     const res = await fetch(`${API_URL}/products`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify({
-        name,
-        cat,
+        name, cat,
         images: addUploadedImages,
         sizes,
         size: sizes.join(' / '),
-        desc,
-        material,
-        sterile,
-        spec,
-        moq,
-        packaging
+        desc, material, sterile, spec, moq, packaging
       })
     });
-    
     const data = await res.json();
     if (!res.ok) throw new Error(data.msg || "Failed to create product");
-    
     resetAddForm();
     toast(`✅ "${name}" added successfully!`, 'success');
     loadProducts();
@@ -1130,39 +1150,32 @@ async function addProduct() {
 
 // ═══ EDIT PRODUCT ═══
 function openEditModal(id) {
-  const p = products.find(x=>x.id===id);
+  const p = products.find(x => x.id === id);
   if (!p) return;
   document.getElementById('edit-id').value = id;
-  document.getElementById('edit-name').value = p.name||'';
-  document.getElementById('edit-cat').value = p.cat||'general';
-  document.getElementById('edit-desc').value = p.desc||'';
-  document.getElementById('edit-material').value = p.material||'';
-  document.getElementById('edit-sterile').value = p.sterile||'Non-Sterile';
-  document.getElementById('edit-spec').value = p.spec||'';
-  document.getElementById('edit-moq').value = p.moq||'';
-  document.getElementById('edit-packaging').value = p.packaging||'';
-  updateCounter('edit-desc','edit-counter');
+  document.getElementById('edit-name').value = p.name || '';
+  document.getElementById('edit-cat').value = p.cat || 'general';
+  document.getElementById('edit-desc').value = p.desc || '';
+  document.getElementById('edit-material').value = p.material || '';
+  document.getElementById('edit-sterile').value = p.sterile || 'Non-Sterile';
+  if (document.getElementById('edit-spec')) document.getElementById('edit-spec').value = p.spec || '';
+  document.getElementById('edit-moq').value = p.moq || '';
+  document.getElementById('edit-packaging').value = p.packaging || '';
+  updateCounter('edit-desc', 'edit-counter');
 
-  // Handle sizes checkboxes
   const checkboxes = document.querySelectorAll('input[name="edit-sizes"]');
   checkboxes.forEach(cb => cb.checked = false);
   document.getElementById('edit-size-custom').style.display = 'none';
   document.getElementById('edit-size-custom').value = '';
 
   let pSizes = [];
-  if (Array.isArray(p.sizes)) {
-    pSizes = p.sizes;
-  } else if (p.size) {
-    pSizes = p.size.split('/').map(s => s.trim());
-  }
+  if (Array.isArray(p.sizes)) pSizes = p.sizes;
+  else if (p.size) pSizes = p.size.split('/').map(s => s.trim());
 
   pSizes.forEach(s => {
     let matched = false;
     checkboxes.forEach(cb => {
-      if (cb.value === s) {
-        cb.checked = true;
-        matched = true;
-      }
+      if (cb.value === s) { cb.checked = true; matched = true; }
     });
     if (!matched && s !== '') {
       const customTrigger = document.getElementById('edit-size-custom-trigger');
@@ -1175,103 +1188,86 @@ function openEditModal(id) {
     }
   });
 
-  // Handle images preview in edit mode
   editUploadedImages = Array.isArray(p.images) ? [...p.images] : [];
   renderImagePreviews('edit');
-
   document.getElementById('editModal').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 
 function closeEditModal() {
   document.getElementById('editModal').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
 
+// ✅ FIXED: /api/products/:id
 async function saveEdit() {
   const id = parseInt(document.getElementById('edit-id').value);
   const name = document.getElementById('edit-name').value.trim();
   const cat = document.getElementById('edit-cat').value;
   const desc = document.getElementById('edit-desc').value.trim();
-  if (!name) { toast('Product name is required.','error'); return; }
-  if (!cat) { toast('Please select a category.','error'); return; }
-  if (!desc) { toast('Description is required.','error'); return; }
-  
-  const oldProd = products.find(x => x.id === id);
-  if (!oldProd) { toast('Product not found.','error'); return; }
+  if (!name) { toast('Product name is required.', 'error'); return; }
+  if (!cat) { toast('Please select a category.', 'error'); return; }
+  if (!desc) { toast('Description is required.', 'error'); return; }
 
   const sizeCheckboxes = document.querySelectorAll('input[name="edit-sizes"]:checked');
   let sizes = Array.from(sizeCheckboxes).map(cb => {
-    if (cb.value === 'Custom') {
-      return document.getElementById('edit-size-custom').value.trim();
-    }
+    if (cb.value === 'Custom') return document.getElementById('edit-size-custom').value.trim();
     return cb.value;
   }).filter(s => s !== '');
   if (sizes.length === 0) sizes = ['Universal'];
 
-  const material = document.getElementById('edit-material').value.trim();
+  const material = document.getElementById('edit-material')?.value.trim() || '';
   const sterile = document.getElementById('edit-sterile').value;
-  const spec = document.getElementById('edit-spec') ? document.getElementById('edit-spec').value.trim() : '';
-  const moq = document.getElementById('edit-moq').value.trim();
-  const packaging = document.getElementById('edit-packaging').value.trim();
+  const spec = document.getElementById('edit-spec')?.value.trim() || '';
+  const moq = document.getElementById('edit-moq')?.value.trim() || '';
+  const packaging = document.getElementById('edit-packaging')?.value.trim() || '';
 
-  showOverlay("Saving changes and updating CDN assets...");
+  showOverlay("Saving changes...");
   try {
     const res = await fetch(`${API_URL}/products/${id}`, {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify({
-        name,
-        cat,
+        name, cat,
         images: editUploadedImages,
         sizes,
         size: sizes.join(' / '),
-        desc,
-        material,
-        sterile,
-        spec,
-        moq,
-        packaging
+        desc, material, sterile, spec, moq, packaging
       })
     });
-    
     const data = await res.json();
     if (!res.ok) throw new Error(data.msg || "Failed to update product");
-    
     closeEditModal();
     toast(`✅ "${name}" updated successfully!`, 'success');
     loadProducts();
   } catch (err) {
     console.error("Error updating product:", err);
-    toast("❌ Failed to update product: " + err.message, "error");
+    toast("❌ Failed to update: " + err.message, "error");
   } finally {
     hideOverlay();
   }
 }
 
 // ═══ DELETE ═══
+// ✅ FIXED: /api/products/:id
 function deleteProduct(id, name) {
-  openConfirm(
-    '🗑️',
-    'Delete Product?',
+  openConfirm('🗑️', 'Delete Product?',
     `Are you sure you want to delete "${name}"? This cannot be undone.`,
     'Delete',
     async () => {
-      showOverlay("Deleting product and CDN files...");
+      showOverlay("Deleting product...");
       try {
         const res = await fetch(`${API_URL}/products/${id}`, {
           method: 'DELETE',
           headers: getAuthHeaders()
         });
-        
         const data = await res.json();
         if (!res.ok) throw new Error(data.msg || "Failed to delete product");
-        
-        toast(`🗑️ "${name}" successfully deleted from catalogue.`, 'warning');
+        toast(`🗑️ "${name}" deleted.`, 'warning');
         loadProducts();
       } catch (err) {
-        console.error("Error deleting product:", err);
-        toast("❌ Failed to delete product: " + err.message, "error");
+        console.error("Error deleting:", err);
+        toast("❌ Failed to delete: " + err.message, "error");
       } finally {
         hideOverlay();
       }
@@ -1280,84 +1276,70 @@ function deleteProduct(id, name) {
 }
 
 // ═══ SETTINGS ═══
+// ✅ FIXED: /api/auth/change-password
 async function changePassword() {
   const cur = document.getElementById('cur-pass').value;
   const np = document.getElementById('new-pass').value;
   const cp = document.getElementById('conf-pass').value;
-  
-  if (!cur || !np || !cp) {
-    toast('Please fill in all password fields.', 'error');
-    return;
-  }
+  if (!cur || !np || !cp) { toast('Please fill in all password fields.', 'error'); return; }
   if (np.length < 6) { toast('New password must be at least 6 characters.', 'error'); return; }
   if (np !== cp) { toast('New passwords do not match.', 'error'); return; }
-  
-  showOverlay("Updating password securely on API...");
+
+  showOverlay("Updating password...");
   try {
     const res = await fetch(`${API_URL}/auth/change-password`, {
       method: 'POST',
       headers: getAuthHeaders(),
-      body: JSON.stringify({
-        currentPassword: cur,
-        newPassword: np
-      })
+      body: JSON.stringify({ currentPassword: cur, newPassword: np })
     });
-    
     const data = await res.json();
     if (!res.ok) throw new Error(data.msg || "Failed to change password");
-    
     toast('✅ Password changed successfully!', 'success');
+    document.getElementById('cur-pass').value = '';
+    document.getElementById('new-pass').value = '';
+    document.getElementById('conf-pass').value = '';
   } catch (err) {
-    console.error("Change password error:", err);
-    toast("❌ Failed to change password: " + err.message, "error");
+    toast("❌ " + err.message, "error");
   } finally {
     hideOverlay();
   }
-  
-  document.getElementById('cur-pass').value = '';
-  document.getElementById('new-pass').value = '';
-  document.getElementById('conf-pass').value = '';
 }
 
 function exportProducts() {
   const data = JSON.stringify(products, null, 2);
-  const blob = new Blob([data], {type:'application/json'});
+  const blob = new Blob([data], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href=url; a.download='hrwork-products.json'; a.click();
+  a.href = url; a.download = 'hrwork-products.json'; a.click();
   URL.revokeObjectURL(url);
-  toast('✅ Products exported successfully!','success');
+  toast('✅ Products exported successfully!', 'success');
 }
 
+// ✅ FIXED: /api/products for import
 function importProducts(input) {
   const file = input.files[0];
   if (!file) return;
-  const routerReader = new FileReader();
-  routerReader.onload = async e => {
+  const reader = new FileReader();
+  reader.onload = async e => {
     try {
       const imported = JSON.parse(e.target.result);
       if (!Array.isArray(imported)) throw new Error('Invalid format');
-      
-      showOverlay("Importing catalogue and uploading assets...");
+      showOverlay("Importing products...");
       let importedCount = 0;
       for (const p of imported) {
         if (p.name && p.cat) {
           try {
             let sizes = p.sizes || [];
-            if (sizes.length === 0 && p.size) {
+            if (sizes.length === 0 && p.size)
               sizes = p.size.split('/').map(s => s.trim()).filter(s => s !== '');
-            }
             if (sizes.length === 0) sizes = ['Universal'];
-            
             const res = await fetch(`${API_URL}/products`, {
               method: 'POST',
               headers: getAuthHeaders(),
               body: JSON.stringify({
-                name: p.name,
-                cat: p.cat,
+                name: p.name, cat: p.cat,
                 images: p.images || [],
-                sizes,
-                size: sizes.join(' / '),
+                sizes, size: sizes.join(' / '),
                 desc: p.desc || '',
                 material: p.material || '',
                 sterile: p.sterile || 'Non-Sterile',
@@ -1368,44 +1350,40 @@ function importProducts(input) {
             });
             if (res.ok) importedCount++;
           } catch (itemErr) {
-            console.error("Error importing individual item:", itemErr);
+            console.error("Error importing item:", itemErr);
           }
         }
       }
-      toast(`✅ Successfully imported ${importedCount} product(s) to catalogue!`, 'success');
+      toast(`✅ Imported ${importedCount} product(s)!`, 'success');
       loadProducts();
-    } catch(err) {
-      toast('❌ Invalid JSON file. Please use a valid export.','error');
+    } catch (err) {
+      toast('❌ Invalid JSON file.', 'error');
     } finally {
       hideOverlay();
+      input.value = '';
     }
-    input.value='';
   };
-  routerReader.readAsText(file);
+  reader.readAsText(file);
 }
 
+// ✅ FIXED: /api/products/reset
 function confirmReset() {
-  openConfirm(
-    '⚠️',
-    'Reset to Default?',
-    'This will permanently remove all your products and restore the 16 original sample products from the database. This cannot be undone.',
+  openConfirm('⚠️', 'Reset to Default?',
+    'This will permanently remove all products and restore defaults. This cannot be undone.',
     'Reset Everything',
     async () => {
-      showOverlay("Resetting database to defaults...");
+      showOverlay("Resetting database...");
       try {
         const res = await fetch(`${API_URL}/products/reset`, {
           method: 'POST',
           headers: getAuthHeaders()
         });
-        
         const data = await res.json();
-        if (!res.ok) throw new Error(data.msg || "Failed to reset database");
-        
-        toast('🔄 Database successfully reset to defaults.', 'warning');
+        if (!res.ok) throw new Error(data.msg || "Failed to reset");
+        toast('🔄 Reset to defaults.', 'warning');
         loadProducts();
       } catch (err) {
-        console.error("Database reset failed:", err);
-        toast("❌ Resetting failed: " + err.message, "error");
+        toast("❌ Reset failed: " + err.message, "error");
       } finally {
         hideOverlay();
       }
@@ -1414,20 +1392,17 @@ function confirmReset() {
 }
 
 function resetAddForm() {
-  ['add-name','add-cat','add-desc','add-material','add-spec','add-moq','add-packaging','add-size-custom'].forEach(id=>{
+  ['add-name', 'add-cat', 'add-desc', 'add-material', 'add-spec', 'add-moq', 'add-packaging', 'add-size-custom'].forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.value='';
+    if (el) el.value = '';
   });
-  document.getElementById('add-sterile').value='Non-Sterile';
-  updateCounter('add-desc','add-counter');
-  
-  // Reset sizes checkboxes
+  document.getElementById('add-sterile').value = 'Non-Sterile';
+  updateCounter('add-desc', 'add-counter');
   document.querySelectorAll('input[name="add-sizes"]').forEach(cb => {
     cb.checked = cb.value === 'Universal';
   });
-  document.getElementById('add-size-custom').style.display = 'none';
-
-  // Reset uploaded images
+  const customInput = document.getElementById('add-size-custom');
+  if (customInput) customInput.style.display = 'none';
   addUploadedImages = [];
   renderImagePreviews('add');
 }
@@ -1436,7 +1411,7 @@ function resetAddForm() {
 function updateCounter(textareaId, counterId) {
   const el = document.getElementById(textareaId);
   const c = document.getElementById(counterId);
-  if (!el||!c) return;
+  if (!el || !c) return;
   const len = el.value.length;
   c.textContent = `${len} / 150`;
   c.classList.toggle('over', len > 140);
@@ -1461,14 +1436,14 @@ function confirmAction() {
 }
 
 // ═══ TOAST ═══
-function toast(msg, type='success') {
-  const icons = {success:'✅',error:'❌',warning:'⚠️'};
+function toast(msg, type = 'success') {
+  const icons = { success: '✅', error: '❌', warning: '⚠️' };
   const el = document.createElement('div');
   el.className = `toast ${type}`;
-  el.innerHTML = `<span class="toast-icon">${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  el.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
   document.getElementById('toastContainer').appendChild(el);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('show')));
-  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);},3500);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 400); }, 3500);
 }
 
 // ═══ MOBILE SIDEBAR ═══

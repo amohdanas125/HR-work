@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MediSurge Instruments — Precision Surgical Solutions</title>
-<meta name="description" content="Trusted supplier of high-quality surgical instruments, disposables, orthopedic tools, and OT equipment for hospitals and clinics across India.">
-<meta name="keywords" content="surgical instruments, medical supplies, orthopedic instruments, disposables, OT equipment, India">
+<title>HR Work — Orthopedic Supports & Products</title>
+<meta name="description" content="Trusted supplier of orthopedic braces, supports, products, and medical garments for hospitals and clinics across India.">
+<meta name="keywords" content="orthopedic supports, knee brace, products, medical garments, lumbar belt, India">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- API Data Layer scripts will load dynamically -->
 <style>
 :root {
   --navy: #0A2647;
@@ -29,7 +28,10 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* prevent horizontal scrollbar */
+}
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -177,13 +179,17 @@ nav.scrolled { background: rgba(6,21,41,0.99); box-shadow: 0 4px 30px rgba(0,0,0
   50% { opacity: 0.5; transform: scale(1.3); }
 }
 
-.hero-title {
-  font-size: clamp(2.8rem, 5vw, 4.2rem);
-  font-weight: 700;
-  color: white;
-  line-height: 1.1;
+/* Hero heading replaced by image */
+.hero-title-img {
+  max-width: 500px;        /* desktop max */
+  width: 100%;
+  height: auto;
+  display: block;
   margin-bottom: 1.25rem;
+  margin-left: 2rem;
 }
+
+/* keep accent if needed but now image replaces whole heading */
 .hero-title .accent { color: var(--gold); font-style: italic; }
 
 .hero-subtitle {
@@ -191,7 +197,9 @@ nav.scrolled { background: rgba(6,21,41,0.99); box-shadow: 0 4px 30px rgba(0,0,0
   color: rgba(255,255,255,0.7);
   line-height: 1.7;
   margin-bottom: 2.5rem;
+  margin-left: 1rem;
   max-width: 480px;
+  text-align:-webkit-center;
 }
 
 .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -244,6 +252,7 @@ nav.scrolled { background: rgba(6,21,41,0.99); box-shadow: 0 4px 30px rgba(0,0,0
 .hero-visual {
   display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
   animation: fadeInRight 0.9s 0.2s ease both;
+  margin-top: -16rem;
 }
 
 .hero-card {
@@ -284,7 +293,10 @@ section { padding: 90px 2rem; }
   line-height: 1.15;
   margin-bottom: 1rem;
 }
-
+/* text alignment */
+.text{
+  text-align: -webkit-center;
+}
 .section-sub {
   font-size: 16px;
   color: var(--gray-600);
@@ -325,7 +337,7 @@ section { padding: 90px 2rem; }
 #categories { background: white; }
 .cat-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
 .cat-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
 }
 .cat-card {
   background: var(--gray-100);
@@ -547,6 +559,7 @@ section { padding: 90px 2rem; }
   color: var(--gray-400);
   flex-direction: column;
   gap: 8px;
+  overflow: hidden; /* clip the iframe */
 }
 .map-placeholder span { font-family: 'DM Sans', sans-serif; font-size: 13px; }
 
@@ -611,7 +624,17 @@ footer {
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .footer-col ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
 .footer-col ul a:hover { color: var(--gold-light); }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-evenly; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 13px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
 .social-links { display: flex; gap: 12px; }
 .social-link {
   width: 36px; height: 36px;
@@ -797,12 +820,56 @@ footer {
   .nav-links { display: none; }
   .hamburger { display: flex; }
 }
-@media (max-width: 600px) {
-  .why-grid, .cat-grid, .product-grid, .strengths-grid, .cert-cards-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  .hero-title-img { max-width: 400px; }
+  .hero-content { padding: 110px 1.5rem 60px; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+  .hero-btns { flex-direction: column; align-items: flex-start; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+
+  .section-title { font-size: 1.8rem; }
+  .why-grid, .cat-grid, .product-grid, .strengths-grid, .cert-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-page-hero { padding: 100px 1.5rem 60px; }
+  .timeline-item { flex-direction: column; gap: 0.5rem; }
   .footer-grid { grid-template-columns: 1fr; }
-  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
-  section { padding: 60px 1.25rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .detail-grid { gap: 2rem; }
+  .detail-form { margin-top: 2rem; }
+  nav { padding: 0 1.5rem; }
+  .hero-visual { display: none; } /* keep hidden on tablet */
+  .map-placeholder { height: 200px; }
+}
+
+@media (max-width: 480px) {
+  .hero-title-img { max-width: 300px; }
+  .hero-content { padding: 100px 1rem 50px; }
+  .hero-badge { font-size: 10px; padding: 4px 12px; }
+  .hero-subtitle { font-size: 15px; }
+  .stat-num { font-size: 1.8rem; }
+  .stat-label { font-size: 10px; }
+  .btn-primary, .btn-outline { font-size: 13px; padding: 12px 20px; }
+  section { padding: 50px 1rem; }
+  .contact-grid, .about-grid, .detail-grid { gap: 2rem; }
+  .map-placeholder { height: 180px; }
+  .contact-form { padding: 1.5rem; }
+  .product-grid { gap: 16px; }
+  .filter-bar { gap: 6px; }
+  .filter-btn { padding: 6px 14px; font-size: 12px; }
+  .search-bar input { max-width: 100%; }
+  .cert-inner { gap: 1.5rem; }
+  .nav-logo-text span:first-child { font-size: 18px; }
+  .nav-logo-text span:last-child { font-size: 9px; }
+  .modal { padding: 1.5rem; }
+}
+
+@media (max-width: 320px) {
+  .hero-title-img { max-width: 240px; }
+  .hero-content { padding: 90px 0.75rem 40px; }
+  .hero-btns { gap: 10px; }
+  .stat-num { font-size: 1.5rem; }
 }
 
 /* ── TOAST ── */
@@ -957,6 +1024,42 @@ footer {
   box-shadow: 0 3px 8px rgba(10,38,71,0.2);
   font-weight: 600;
 }
+
+/* ── ABOUT PAGE MOBILE OVERRIDE ── */
+@media (max-width: 768px) {
+  #page-about .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 0 !important;
+  }
+
+  #page-about .about-grid > div:first-child {
+    display: block !important; /* SHOW the text column */
+    width: 100% !important;
+    text-align: center !important;
+    padding: 0 1.25rem !important;
+  }
+
+  #page-about .about-grid > div:last-child {
+    display:; /* HIDE the timeline on mobile */
+  }
+
+  #page-about .section-label {
+    justify-content: center;
+  }
+
+  #page-about .section-title.text {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  #page-about .about-grid p.text {
+    text-align: center !important;
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+    color: var(--gray-600) !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -978,15 +1081,11 @@ footer {
       <ul class="nav-dropdown-menu">
         <li><a href="#" onclick="filterProducts('all');showPage('products')">All Products</a></li>
         <li><a href="#" onclick="filterProducts('supports');showPage('products')">Supports & Braces</a></li>
-        <li><a href="#" onclick="filterProducts('general');showPage('products')">General Surgical</a></li>
-        <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic</a></li>
-        <li><a href="#" onclick="filterProducts('disposables');showPage('products')">Disposables</a></li>
-        <li><a href="#" onclick="filterProducts('ot');showPage('products')">OT Equipment</a></li>
-        <li><a href="#" onclick="filterProducts('diagnostic');showPage('products')">Diagnostic</a></li>
-        <li><a href="#" onclick="filterProducts('specialty');showPage('products')">Specialty</a></li>
+        <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic Instruments</a></li>
+        <li><a href="#" onclick="filterProducts('rehab');showPage('products')">Products</a></li>
+        <li><a href="#" onclick="filterProducts('garments');showPage('products')">Medical Garments</a></li>
       </ul>
     </li>
-    <!-- <li><a href="#" onclick="showPage('certifications')">Certifications</a></li> -->
     <li><a href="#" onclick="showPage('contact')">Contact</a></li>
     <li><a href="#" class="nav-cta" onclick="openModal()">Get Quote</a></li>
   </ul>
@@ -1000,7 +1099,6 @@ footer {
   <a href="#" onclick="showPage('home');toggleMobileNav()" style="display:block;color:rgba(255,255,255,0.8);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px">Home</a>
   <a href="#" onclick="showPage('about');toggleMobileNav()" style="display:block;color:rgba(255,255,255,0.8);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px">About Us</a>
   <a href="#" onclick="showPage('products');toggleMobileNav()" style="display:block;color:rgba(255,255,255,0.8);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px">Products</a>
-  <!-- <a href="#" onclick="showPage('certifications');toggleMobileNav()" style="display:block;color:rgba(255,255,255,0.8);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px">Certifications</a> -->
   <a href="#" onclick="showPage('contact');toggleMobileNav()" style="display:block;color:rgba(255,255,255,0.8);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px">Contact Us</a>
   <a href="#" onclick="openModal();toggleMobileNav()" style="display:block;background:var(--gold);color:var(--navy-dark);text-decoration:none;padding:12px 20px;border-radius:4px;font-weight:600;font-size:14px;text-align:center;margin-top:1rem">Get Quote</a>
 </div>
@@ -1014,12 +1112,17 @@ footer {
     <div class="hero-bg"></div>
     <div class="hero-content">
       <div class="hero-text">
-        <div class="hero-badge">Your Safety, Our Priority, Reliability Guaranteed</div>
-        <h1 class="hero-title">
-          Precision Instruments<br>for <span class="accent">Modern Surgery</span>
-        </h1>
+        <div class="hero-badge">Your Recovery, Our Priority — Trusted Across India</div>
+        <!-- REPLACED H1 WITH IMAGE -->
+        <img 
+          src="HR WORK b.jpg - Edited.png" 
+          alt="Orthopedic Supports & Products"
+          class="hero-title-img"
+          title="Orthopedic Supports & Products"
+        >
+        <!-- END REPLACEMENT -->
         <p class="hero-subtitle">
-          India's trusted supplier of surgical instruments, disposables, orthopedic tools, and OT equipment — serving hospitals and clinics nationwide.
+          India's trusted supplier of orthopedic braces, supports, products, and medical garments — serving hospitals and clinics nationwide.
         </p>
         <div class="hero-btns">
           <a href="#" class="btn-primary" onclick="showPage('products')">Browse Products →</a>
@@ -1028,30 +1131,29 @@ footer {
         <div class="hero-stats">
           <div class="stat-item"><span class="stat-num">10+</span><span class="stat-label">Products</span></div>
           <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">Hospitals</span></div>
-          <!-- <div class="stat-item"><span class="stat-num">18+</span><span class="stat-label">Years</span></div> -->
           <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">States</span></div>
         </div>
       </div>
       <div class="hero-visual">
         <div class="hero-card">
-          <div class="hero-card-icon">🔬</div>
+          <div class="hero-card-icon">🦵</div>
           <div>
             <div class="hero-card-label">Latest Addition</div>
-            <div class="hero-card-title">Laparoscopic Instrument Set</div>
-            <div class="hero-card-sub">Now available in 5mm & 10mm</div>
+            <div class="hero-card-title">Premium Knee Brace Range</div>
+            <div class="hero-card-sub">Available in S / M / L / XL</div>
           </div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-icon">🏥</div>
-          <div class="hero-card-label">Category</div>
-          <div class="hero-card-title">General Surgical</div>
-          <div class="hero-card-sub">12+ instruments</div>
         </div>
         <div class="hero-card">
           <div class="hero-card-icon">🦴</div>
           <div class="hero-card-label">Category</div>
           <div class="hero-card-title">Orthopedic</div>
           <div class="hero-card-sub">8+ instruments</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon">🏋️</div>
+          <div class="hero-card-label">Category</div>
+          <div class="hero-card-title">/div>
+          <div class="hero-card-sub">10+ products</div>
         </div>
         <div class="hero-card">
           <div class="hero-card-icon">📦</div>
@@ -1066,31 +1168,31 @@ footer {
   <!-- WHY CHOOSE US -->
   <section id="why">
     <div class="container">
-      <div class="fade-in">
+      <div class="fade-in text">
         <div class="section-label">Why Choose Us</div>
-        <h2 class="section-title">Your Partner in Surgical Excellence</h2>
+        <h2 class="section-title text">Your Partner in Surgical Excellence</h2>
         <p class="section-sub">We combine rigorous quality standards with a comprehensive product range to serve India's leading healthcare institutions.</p>
       </div>
       <div class="why-grid">
         <div class="why-card fade-in">
           <div class="why-icon">🏅</div>
           <div class="why-title">Quality Assured</div>
-          <p class="why-text">Rigorous testing before dispatch ensures reliability in critical surgical environments.</p>
+          <p class="why-text">Every product undergoes rigorous quality checks. Our supports and braces meet medical-grade standards for safe use in clinical and home recovery settings.</p>
         </div>
         <div class="why-card fade-in">
           <div class="why-icon">📋</div>
           <div class="why-title">Wide Product Range</div>
-          <p class="why-text">Over 10 surgical instruments across 6 categories — from basic forceps to advanced laparoscopic sets and OT equipment.</p>
+          <p class="why-text">10+ products across supports, braces, aids, and medical garments — covering every stage of orthopedic recovery and patient care.</p>
         </div>
         <div class="why-card fade-in">
           <div class="why-icon">🏨</div>
           <div class="why-title">Trusted by Hospitals</div>
-          <p class="why-text">Serving 20+ hospitals, nursing homes, and surgical centers across India. Your trust is our foundation.</p>
+          <p class="why-text">Supplying 20+ hospitals, nursing homes, physiotherapy centers, and surgical clinics across India. Built on long-term relationships and reliability.</p>
         </div>
         <div class="why-card fade-in">
           <div class="why-icon">🚚</div>
           <div class="why-title">Pan-India Supply</div>
-          <p class="why-text">Reliable logistics network covering all 28 states. Bulk orders dispatched within 72 hours with full tracking support.</p>
+          <p class="why-text">Reliable logistics network covering all major states. Bulk orders dispatched within 72 hours with full tracking support and dedicated account management.</p>
         </div>
       </div>
     </div>
@@ -1107,40 +1209,28 @@ footer {
         <a href="#" class="btn-primary" onclick="showPage('products')" style="white-space:nowrap;background-color:#144272; color: #FFFFFF;">View All Products →</a>
       </div>
       <div class="cat-grid">
-        <a class="cat-card fade-in" href="#" onclick="filterProducts('general');showPage('products')">
-          <div class="cat-icon">🔧</div>
-          <div class="cat-title">General Surgical</div>
-          <p class="cat-desc">Scissors, forceps, retractors, needle holders, and complete surgical sets for all general procedures.</p>
-          <span class="cat-link">View Products →</span>
-        </a>
-        <a class="cat-card fade-in" href="#" onclick="filterProducts('disposables');showPage('products')">
-          <div class="cat-icon">🧴</div>
-          <div class="cat-title">Disposables & Consumables</div>
-          <p class="cat-desc">Sterile gloves, sutures, drapes, syringes, IV cannulas, and single-use surgical supplies.</p>
+        <a class="cat-card fade-in" href="#" onclick="filterProducts('supports');showPage('products')">
+          <div class="cat-icon">🦵</div>
+          <div class="cat-title">Supports &amp; Braces</div>
+          <p class="cat-desc">Knee braces, ankle supports, wrist splints, cervical collars, lumbar belts, and full-body orthopedic supports for post-surgical and injury recovery.</p>
           <span class="cat-link">View Products →</span>
         </a>
         <a class="cat-card fade-in" href="#" onclick="filterProducts('orthopedic');showPage('products')">
           <div class="cat-icon">🦴</div>
           <div class="cat-title">Orthopedic Instruments</div>
-          <p class="cat-desc">Bone chisels, mallets, reamers, reduction forceps, and specialized orthopedic surgical tools.</p>
+          <p class="cat-desc">Bone chisels, mallets, reamers, reduction forceps, and specialized orthopedic surgical tools for precision bone and joint procedures.</p>
           <span class="cat-link">View Products →</span>
         </a>
-        <a class="cat-card fade-in" href="#" onclick="filterProducts('diagnostic');showPage('products')">
-          <div class="cat-icon">🩺</div>
-          <div class="cat-title">Diagnostic Tools</div>
-          <p class="cat-desc">Stethoscopes, otoscopes, ophthalmoscopes, reflex hammers, and clinical examination instruments.</p>
+        <a class="cat-card fade-in" href="#" onclick="filterProducts('rehab');showPage('products')">
+          <div class="cat-icon">🏃</div>
+          <div class="cat-title">Products</div>
+          <p class="cat-desc">Walking aids, crutches, physiotherapy tools, resistance bands, exercise equipment, and recovery support devices for patient </p>
           <span class="cat-link">View Products →</span>
         </a>
-        <a class="cat-card fade-in" href="#" onclick="filterProducts('ot');showPage('products')">
-          <div class="cat-icon">🏥</div>
-          <div class="cat-title">OT Equipment</div>
-          <p class="cat-desc">Operating tables, shadowless lamps, anesthesia trolleys, suction machines, and OT accessories.</p>
-          <span class="cat-link">View Products →</span>
-        </a>
-        <a class="cat-card fade-in" href="#" onclick="filterProducts('specialty');showPage('products')">
-          <div class="cat-icon">⚗️</div>
-          <div class="cat-title">Specialty Instruments</div>
-          <p class="cat-desc">Laparoscopic sets, neurosurgical tools, ENT instruments, and cardiovascular surgical equipment.</p>
+        <a class="cat-card fade-in" href="#" onclick="filterProducts('garments');showPage('products')">
+          <div class="cat-icon">🩱</div>
+          <div class="cat-title">Medical Garments</div>
+          <p class="cat-desc">Compression stockings, abdominal binders, post-surgical garments, and therapeutic wraps designed for comfort, recovery, and medical support.</p>
           <span class="cat-link">View Products →</span>
         </a>
       </div>
@@ -1153,46 +1243,27 @@ footer {
       <div class="about-grid">
         <div class="about-img-wrap fade-in">
           <div class="about-img-box">
-            <img src="Gemini_Generated_Image_gte1ekgte1ekgte1.png" style="height: 40rem;" alt="">
+            <img src="Gemini_Generated_Image_69uq3u69uq3u69uq.png" style="max-width:100%; height:auto; display:block;" alt="About HR Work">
             <div class="about-badge">
-              <!-- <span>18+</span> -->
-              <!-- <span>Years of Trust</span> -->
             </div>
           </div>
         </div>
         <div class="fade-in">
           <div class="section-label" style="color:var(--gold-light)">About Us</div>
-          <h2 class="section-title" style="color:white">Built on Quality, Trusted by Surgeons</h2>
+          <h2 class="section-title" style="color:white">Built on Quality, Trusted by Surgeons &amp; Physiotherapists</h2>
           <p class="about-body" style="color:rgba(255,255,255,0.65)">
-          HR Work has grown from a regional distributor to one of India's most trusted surgical instrument suppliers. At HR Work, we are dedicated to advancing healthcare through precision-engineered surgical products. As a trusted manufacturer, we combine innovation, quality, and reliability to deliver instruments that meet the highest standards of medical excellence.
+            HR Work has grown from a regional distributor to one of India's most trusted suppliers of orthopedic supports, products, and medical garments. We combine innovation, quality, and reliability to deliver products that meet the highest standards of medical excellence.
+          </p>
           <ul class="about-list">
-            <!-- <li><span>ISO 13485:2016 certified quality management system</span></li> -->
-            <li><span>Direct partnerships with leading Indian & international manufacturers</span></li>
-            <li><span>Dedicated after-sales support and product training</span></li>
-            <li><span>Custom procurement solutions for large hospital groups</span></li>
+            <li><span>Direct partnerships with leading Indian &amp; international manufacturers</span></li>
+            <li><span>Dedicated after-sales support and product training for clinical staff</span></li>
+            <li><span>Custom procurement solutions for hospitals, nursing homes, and physiotherapy centers</span></li>
           </ul>
           <a href="#" class="btn-primary" onclick="showPage('about')" style="margin-top:1rem">Learn More About Us →</a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- CERTIFICATIONS STRIP -->
-  <!-- <section id="cert-strip">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:2rem">
-        <div class="section-label" style="justify-content:center">Quality Assurance</div>
-        <h3 style="font-size:1.5rem;color:var(--navy);font-family:'Cormorant Garamond',serif">Our Certifications & Standards</h3>
-      </div>
-      <div class="cert-inner">
-        <div class="cert-item"><div class="cert-badge-icon">🏅</div><span>ISO 13485</span></div>
-        <div class="cert-item"><div class="cert-badge-icon">🇪🇺</div><span>CE Mark</span></div>
-        <div class="cert-item"><div class="cert-badge-icon">🇮🇳</div><span>CDSCO Registered</span></div>
-        <div class="cert-item"><div class="cert-badge-icon">🌍</div><span>WHO-GMP</span></div>
-        <div class="cert-item"><div class="cert-badge-icon">🔬</div><span>BIS Certified</span></div>
-      </div>
-    </div>
-  </section> -->
 
   <!-- CTA BANNER -->
   <section id="cta-banner">
@@ -1206,7 +1277,7 @@ footer {
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (main) -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -1218,48 +1289,42 @@ footer {
               <span style="color:rgba(255,255,255,0.4)">Surgical Products</span>
             </div>
           </a>
-          <p>Trusted supplier of high-quality surgical instruments and medical consumables for hospitals, nursing homes, and surgical centers across India.</p>
-          <div class="social-links">
+          <p>Trusted supplier of high-quality orthopedic supports, products, and medical garments for hospitals, nursing homes, and physiotherapy centers across India.</p>
+          <!-- <div class="social-links">
             <a class="social-link" href="#" title="LinkedIn">in</a>
             <a class="social-link" href="#" title="Facebook">f</a>
             <a class="social-link" href="#" title="Instagram">ig</a>
             <a class="social-link" href="#" title="YouTube">▶</a>
-          </div>
+          </div> -->
         </div>
         <div class="footer-col">
           <h4>Products</h4>
           <ul>
-            <li><a href="#" onclick="filterProducts('supports');showPage('products')">Supports & Braces</a></li>
-            <li><a href="#" onclick="filterProducts('general');showPage('products')">General Surgical</a></li>
-            <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic</a></li>
-            <li><a href="#" onclick="filterProducts('disposables');showPage('products')">Disposables</a></li>
-            <li><a href="#" onclick="filterProducts('ot');showPage('products')">OT Equipment</a></li>
-            <li><a href="#" onclick="filterProducts('diagnostic');showPage('products')">Diagnostic</a></li>
-            <li><a href="#" onclick="filterProducts('specialty');showPage('products')">Specialty</a></li>
+            <li><a href="#" onclick="filterProducts('supports');showPage('products')">Supports &amp; Braces</a></li>
+            <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic Instruments</a></li>
+            <li><a href="#" onclick="filterProducts('rehab');showPage('products')">Products</a></li>
+            <li><a href="#" onclick="filterProducts('garments');showPage('products')">Medical Garments</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
             <li><a href="#" onclick="showPage('about')">About Us</a></li>
-            <!-- <li><a href="#" onclick="showPage('certifications')">Certifications</a></li> -->
             <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
-            <!-- <li><a href="#">Download catalogueue</a></li> -->
           </ul>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
           <ul>
             <li><a href="#">📍 Kanpur , India</a></li>
-             <li><a href="tel:+91 512-4221204">📞 +91 512-4221204</a></li>
+            <li><a href="tel:+91 512-4221204">📞 +91 512-4221204</a></li>
             <li><a href="mailto:healthrecoverywork@gmail.com">✉ healthrecoverywork@gmail</a></li>
             <li><a href="#">⏰ Mon–Sat, 9AM–6PM</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2024 HR Work. All rights reserved.</span>
-        <!-- <span>ISO 13485 Certified · CE Marked · CDSCO Registered</span> -->
+        <span>Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved.</span>
       </div>
     </div>
   </footer>
@@ -1270,8 +1335,8 @@ footer {
   <div style="padding:120px 2rem 40px;background:var(--navy)">
     <div class="container">
       <div class="section-label" style="color:var(--gold-light)">Our catalogue</div>
-      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);color:white;margin-bottom:1rem">Surgical Products & Medical Supplies</h1>
-      <p style="color:rgba(255,255,255,0.6);font-size:16px">Browse our complete catalogue of 20+ products across 6 categories</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);color:white;margin-bottom:1rem" class="text">Orthopedic &amp; Products</h1>
+      <p style="color:rgba(255,255,255,0.6);font-size:16px" class="text">Browse our complete catalogue across 4 categories</p>
     </div>
   </div>
   <section id="products">
@@ -1282,19 +1347,16 @@ footer {
       </div>
       <div class="filter-bar" id="filterBar">
         <button class="filter-btn active" onclick="filterProducts('all')">All Products</button>
-        <button class="filter-btn" onclick="filterProducts('supports')">Supports & Braces</button>
-        <button class="filter-btn" onclick="filterProducts('general')">General Surgical</button>
-        <button class="filter-btn" onclick="filterProducts('orthopedic')">Orthopedic</button>
-        <button class="filter-btn" onclick="filterProducts('disposables')">Disposables</button>
-        <button class="filter-btn" onclick="filterProducts('ot')">OT Equipment</button>
-        <button class="filter-btn" onclick="filterProducts('diagnostic')">Diagnostic</button>
-        <button class="filter-btn" onclick="filterProducts('specialty')">Specialty</button>
+        <button class="filter-btn" onclick="filterProducts('supports')">Supports &amp; Braces</button>
+        <button class="filter-btn" onclick="filterProducts('orthopedic')">Orthopedic Instruments</button>
+        <button class="filter-btn" onclick="filterProducts('rehab')">Products</button>
+        <button class="filter-btn" onclick="filterProducts('garments')">Medical Garments</button>
       </div>
       <div class="product-grid" id="productGrid"></div>
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    © 2024 HR Work · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact</a>
   </footer>
 </div>
 
@@ -1320,7 +1382,7 @@ footer {
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px;margin-top:4rem">
-    © 2024 HR Work · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('products')" style="color:var(--gold-light);text-decoration:none">All Products</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('products')" style="color:var(--gold-light);text-decoration:none">All Products</a>
   </footer>
 </div>
 
@@ -1330,7 +1392,7 @@ footer {
     <div class="container">
       <div class="section-label" style="justify-content:center;color:var(--gold-light)">Our Story</div>
       <h1>Built on Trust, Driven by Quality</h1>
-      <p>With a strong focus on research, craftsmanship, and modern technology, we design and produce surgical products that reflect both durability and precision.</p>
+      <p>With a strong focus on research, craftsmanship, and modern technology, we design and produce orthopedic and products that reflect both durability and precision.</p>
     </div>
   </div>
   <section style="background:white">
@@ -1338,17 +1400,16 @@ footer {
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center" class="about-grid">
         <div>
           <div class="section-label">Our Journey</div>
-          <h2 class="section-title">Two Decades of Surgical Excellence</h2>
-          <p style="color:var(--gray-600);line-height:1.8;margin:1rem 0">
-           At HR Work, we are dedicated to advancing healthcare through precision-engineered surgical products. As a trusted manufacturer, we combine innovation, quality, and reliability to deliver instruments that meet the highest standards of medical excellence. Our mission is to empower surgeons and healthcare professionals with tools that enhance performance, improve patient outcomes, and ensure safety at every step.
+          <h2 class="section-title text">HR Work — Precision You Can Trust, Care You Can Feel</h2>
+          <p style="color:var(--gray-600);line-height:1.8;margin:1rem 0" class="text">
+           At HR Work, we are dedicated to advancing healthcare through precision-engineered orthopedic and products. As a trusted manufacturer, we combine innovation, quality, and reliability to deliver products that meet the highest standards of medical excellence. Our mission is to empower surgeons, physiotherapists, and healthcare professionals with tools that enhance performance, improve patient outcomes, and ensure safety at every step.
           </p>
-          <p style="color:var(--gray-600);line-height:1.8">
+          <p style="color:var(--gray-600);line-height:1.8" class="text">
            Driven by integrity and a commitment to excellence, HR Work continues to grow as a partner in healthcare innovation. We value long-term relationships with hospitals, clinics, and distributors worldwide, ensuring that our products reach those who need them most. By blending expertise with compassion, we strive to make a meaningful impact in the medical field—because at HR Work, every product is crafted with the vision of saving lives.
           </p>
         </div>
-        <div class="timeline">
-          <div class="timeline-item"><div class="timeline-year">2005</div><div class="timeline-content"><h4>Company Founded</h4><p>Started operations as a regional surgical instrument distributor in Kanpur.</p></div></div>
-          <!-- <div class="timeline-item"><div class="timeline-year">2010</div><div class="timeline-content"><h4>ISO Certification</h4><p>Achieved ISO 13485 certification, establishing our quality management system.</p></div></div> -->
+        <div class="timeline text">
+          <div class="timeline-item"><div class="timeline-year">2005</div><div class="timeline-content"><h4>Company Founded</h4><p>Started operations as a regional orthopedic product distributor in Kanpur.</p></div></div>
           <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-content"><h4>Pan-India Expansion</h4><p>Extended operations to 5+ states with a dedicated logistics network.</p></div></div>
           <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-content"><h4>12+ Products</h4><p>Expanded catalogue to 12+ products, serving 5+ hospitals nationwide.</p></div></div>
         </div>
@@ -1358,7 +1419,7 @@ footer {
   <section style="background:var(--off-white)">
     <div class="container">
       <div class="section-label">Our Strengths</div>
-      <h2 class="section-title">Why We Stand Apart</h2>
+      <h2 class="section-title text">Why We Stand Apart</h2>
       <div class="strengths-grid" style="margin-top:2.5rem">
         <div class="strength-card"><div class="strength-icon">🔬</div><div class="strength-title">Rigorous Quality Control</div><p class="strength-text">Every batch is tested for material quality, sterility, and dimensional accuracy before dispatch. Zero compromise on patient safety.</p></div>
         <div class="strength-card"><div class="strength-icon">🚀</div><div class="strength-title">Fast Turnaround</div><p class="strength-text">Bulk orders dispatched within 72 hours. Emergency orders fulfilled within 24 hours for critical hospital requirements.</p></div>
@@ -1370,52 +1431,14 @@ footer {
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    © 2024 HR Work · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact Us</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact Us</a>
   </footer>
 </div>
-
-<!-- ═══════════════ CERTIFICATIONS PAGE ═══════════════ -->
-<!-- <div id="page-certifications" class="page">
-  <div class="certs-page-hero">
-    <div class="container">
-      <div class="section-label" style="justify-content:center;color:var(--gold-light)">Quality Standards</div>
-      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);color:white;margin-bottom:1rem">Certifications & Compliance</div>
-      <p style="color:rgba(255,255,255,0.6);font-size:16px;max-width:540px;margin:0 auto">Every product we supply meets the highest national and international quality standards. Our certifications are a commitment to your safety.</p>
-    </div>
-  </div> -->
-  <!-- <section id="certifications" style="background:var(--off-white)">
-    <div class="container">
-      <div class="section-label">Our Certifications</div>
-      <h2 class="section-title">Verified. Certified. Trusted.</h2>
-      <div class="cert-cards-grid">
-        <div class="cert-card"><div class="cert-card-icon">🏅</div><h3>ISO 13485:2016</h3><p>Our quality management system is certified to ISO 13485:2016, the international standard for medical device manufacturers and suppliers.</p><span class="cert-num">Cert No: ISO/QMS/2010/XXXX</span></div>
-        <div class="cert-card"><div class="cert-card-icon">🇪🇺</div><h3>CE Mark</h3><p>Selected products carry the CE Mark, confirming conformity with European health, safety, and environmental protection standards.</p><span class="cert-num">CE 0086 — Class I/IIa</span></div>
-        <div class="cert-card"><div class="cert-card-icon">🇮🇳</div><h3>CDSCO Registration</h3><p>Registered with the Central Drugs Standard Control Organisation (CDSCO) under the Medical Devices Rules, 2017.</p><span class="cert-num">Reg No: MD/XXXX/2012</span></div>
-        <div class="cert-card"><div class="cert-card-icon">🌍</div><h3>WHO-GMP Partners</h3><p>We exclusively source from WHO-GMP certified manufacturing facilities, ensuring global-standard production practices.</p><span class="cert-num">Verified Annually</span></div>
-        <div class="cert-card"><div class="cert-card-icon">🔬</div><h3>BIS Certified</h3><p>Bureau of Indian Standards certification for applicable product categories, confirming adherence to Indian Standards.</p><span class="cert-num">BIS Lic: CM/L-XXXXXXX</span></div>
-        <div class="cert-card"><div class="cert-card-icon">💊</div><h3>Drug License</h3><p>Valid drug license for distribution of scheduled medical devices and pharmaceutical consumables as per Drugs & Cosmetics Act.</p><span class="cert-num">DL No: DL/XXXX/XXXX</span></div>
-      </div>
-      <div class="quality-process">
-        <div class="section-label" style="margin-top:2rem">Our Process</div>
-        <h2 class="section-title">Quality Assurance at Every Step</h2>
-        <div class="process-steps">
-          <div class="process-step"><div class="step-circle">🏭</div><div class="step-title">Manufacturer Audit</div><p class="step-text">We audit all manufacturing partners annually for GMP compliance.</p></div>
-          <div class="process-step"><div class="step-circle">📋</div><div class="step-title">Document Verification</div><p class="step-text">All COA, sterility test reports, and regulatory documents verified.</p></div>
-          <div class="process-step"><div class="step-circle">🔍</div><div class="step-title">Incoming Inspection</div><p class="step-text">Random sampling and physical inspection on every incoming batch.</p></div>
-          <div class="process-step"><div class="step-circle">🚚</div><div class="step-title">Certified Dispatch</div><p class="step-text">Products dispatched with full documentation and traceability records.</p></div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-  <!-- <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    © 2024 [Your Company] · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact Us</a>
-  </footer>
-</div> -->
 
 <!-- ═══════════════ CONTACT PAGE ═══════════════ -->
 <div id="page-contact" class="page">
   <div style="padding:120px 2rem 60px;background:var(--navy)">
-    <div class="container">
+    <div class="container text">
       <div class="section-label" style="color:var(--gold-light)">Get in Touch</div>
       <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);color:white;margin-bottom:1rem">Contact Our Team</h1>
       <p style="color:rgba(255,255,255,0.6);font-size:16px">Request a quote, bulk order, or just ask us anything about our products.</p>
@@ -1444,7 +1467,7 @@ footer {
             <div><h4>Business Hours</h4><p>Monday – Saturday<br>9:00 AM – 6:00 PM IST</p></div>
           </div>
           <div class="map-placeholder" style="padding:0; overflow:hidden; border-radius:12px;">
-           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.44021468408!2d80.3934848752073!3d26.44153547693117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c40eee54d8ea9%3A0xc89e4673b4ba6dda!2sTila%20Lane%2C%20Asharfabad%2C%20Jajmau%2C%20Kanpur%2C%20Uttar%20Pradesh%20209861!5e0!3m2!1sen!2sin!4v1779461559790!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.44021468408!2d80.3934848752073!3d26.44153547693117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c40eee54d8ea9%3A0xc89e4673b4ba6dda!2sTila%20Lane%2C%20Asharfabad%2C%20Jajmau%2C%20Kanpur%2C%20Uttar%20Pradesh%20209861!5e0!3m2!1sen!2sin!4v1779461559790!5m2!1sen!2sin" style="width:100%; height:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
         <div class="contact-form">
@@ -1461,13 +1484,10 @@ footer {
             <div class="form-group"><label>Product Interest</label>
               <select id="cf-product">
                 <option value="">Select category...</option>
-                <option>General Surgical Instruments</option>
-                <option>Supports & Braces</option>
-                <option>Disposables & Consumables</option>
+                <option>Supports &amp; Braces</option>
                 <option>Orthopedic Instruments</option>
-                <option>OT Equipment</option>
-                <option>Diagnostic Tools</option>
-                <option>Specialty Instruments</option>
+                <option>Products</option>
+                <option>Medical Garments</option>
                 <option>Mixed / Multiple Categories</option>
               </select>
             </div>
@@ -1485,7 +1505,7 @@ footer {
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    © 2024 HR Work · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a>
   </footer>
 </div>
 
@@ -1529,22 +1549,13 @@ footer {
 <script>
 // ── DEFAULT PRODUCTS ──
 const DEFAULT_PRODUCTS = [
-  {id:1,name:'Mayo Scissors (Straight)',cat:'general',icon:'✂️',desc:'Stainless steel mayo scissors for cutting sutures and tissues.',material:'SS 304',size:'14cm / 17cm',sterile:'Non-Sterile',moq:'10 units',spec:'Straight & Curved',packaging:'Individual / Bulk'},
-  {id:2,name:'Mosquito Forceps',cat:'general',icon:'🔧',desc:'Hemostatic clamps for controlling small blood vessels.',material:'SS 316L',size:'12.5cm / 14cm',sterile:'Non-Sterile',moq:'10 units',spec:'Curved & Straight',packaging:'Individual'},
-  {id:3,name:'Kocher Forceps',cat:'general',icon:'🔩',desc:'Heavy-duty tissue holding forceps with 1×2 teeth.',material:'SS 304',size:'14cm / 18cm / 20cm',sterile:'Non-Sterile',moq:'5 units',spec:'With Teeth',packaging:'Individual / Bulk'},
-  {id:4,name:'Laparoscopic Trocar Set',cat:'specialty',icon:'🔬',desc:'Complete trocar set for laparoscopic procedures in 5mm, 10mm, 12mm.',material:'Medical Grade SS',size:'5mm / 10mm / 12mm',sterile:'Non-Sterile',moq:'1 set',spec:'3-Piece Set',packaging:'Set Box'},
-  {id:5,name:'Surgical Gloves (Sterile)',cat:'disposables',icon:'🧤',desc:'Latex surgical gloves, sterile, powder-free, pairs packed.',material:'Natural Latex',size:'6.0 to 9.0',sterile:'Sterile',moq:'100 pairs',spec:'Powder Free',packaging:'Box of 50 pairs'},
-  {id:6,name:'IV Cannula 20G',cat:'disposables',icon:'💉',desc:'Intravenous cannula with flashback chamber, sterile packed.',material:'Teflon / PP',size:'20G / 22G / 24G',sterile:'Sterile',moq:'100 pcs',spec:'With Wings',packaging:'Individual blister'},
-  {id:7,name:'Bone Chisel Set',cat:'orthopedic',icon:'🦴',desc:'Complete set of orthopedic bone chisels in various widths.',material:'Surgical SS',size:'6mm to 25mm',sterile:'Non-Sterile',moq:'1 set',spec:'7-Piece Set',packaging:'Roll Pouch'},
-  {id:8,name:'Shadowless OT Light',cat:'ot',icon:'💡',desc:'LED shadowless operating light with adjustable arm, 120,000 Lux.',material:'Aluminum / ABS',size:'Single Dome',sterile:'N/A',moq:'1 unit',spec:'LED, 120K Lux',packaging:'Wooden Crate'},
-  {id:9,name:'Digital Stethoscope',cat:'diagnostic',icon:'🩺',desc:'Dual-head stethoscope with acoustic clarity for clinical use.',material:'Stainless Steel / PVC',size:'Standard',sterile:'N/A',moq:'1 unit',spec:'Dual Head',packaging:'Carry Case'},
-  {id:10,name:'Needle Holder (Mayo-Hegar)',cat:'general',icon:'🪡',desc:'Standard needle holder for suturing — tungsten carbide inserts.',material:'SS 304 + TC',size:'14cm / 18cm / 20cm',sterile:'Non-Sterile',moq:'5 units',spec:'TC Insert',packaging:'Individual'},
-  {id:11,name:'Orthopedic Mallet',cat:'orthopedic',icon:'🔨',desc:'Stainless steel orthopedic mallet for bone manipulation.',material:'SS 316',size:'250g / 500g',sterile:'Non-Sterile',moq:'2 units',spec:'SS Head',packaging:'Individual'},
-  {id:12,name:'Suction Machine (Electric)',cat:'ot',icon:'⚙️',desc:'Portable electric suction machine for surgical aspiration.',material:'ABS Plastic / SS',size:'7L Tank',sterile:'N/A',moq:'1 unit',spec:'7L, 600mmHg',packaging:'Carton'},
-  {id:13,name:'Absorbable Suture (Vicryl)',cat:'disposables',icon:'🧵',desc:'Polyglactin 910 absorbable sutures, sterile, needle attached.',material:'Polyglactin 910',size:'1-0 to 4-0',sterile:'Sterile',moq:'12 pcs',spec:'Needle Attached',packaging:'Individual foil pack'},
-  {id:14,name:'ENT Nasal Speculum',cat:'specialty',icon:'👂',desc:'Killian nasal speculum for anterior rhinoscopy examination.',material:'SS 304',size:'Small / Medium / Large',sterile:'Non-Sterile',moq:'5 units',spec:'Self-Retaining',packaging:'Individual'},
-  {id:15,name:'Reflex Hammer (Taylor)',cat:'diagnostic',icon:'🔴',desc:'Classic Taylor percussion hammer for neurological examination.',material:'Rubber / Chrome Steel',size:'Standard',sterile:'N/A',moq:'5 units',spec:'Taylor Type',packaging:'Individual'},
-  {id:16,name:'Retractor (Langenbeck)',cat:'general',icon:'📏',desc:'Double-ended Langenbeck retractor for wound exposure.',material:'SS 304',size:'Small / Medium / Large',sterile:'Non-Sterile',moq:'5 units',spec:'Double Ended',packaging:'Individual'},
+  {id:7,  name:'Bone Chisel Set',          cat:'orthopedic', icon:'🦴', desc:'Complete set of orthopedic bone chisels in various widths.', material:'Surgical SS', size:'6mm to 25mm', sterile:'Non-Sterile', moq:'1 set',    spec:'7-Piece Set',           packaging:'Roll Pouch'},
+  {id:11, name:'Orthopedic Mallet',        cat:'orthopedic', icon:'🔨', desc:'Stainless steel orthopedic mallet for bone manipulation.',  material:'SS 316',      size:'250g / 500g', sterile:'Non-Sterile', moq:'2 units', spec:'SS Head',               packaging:'Individual'},
+  {id:17, name:'Knee Support Brace',       cat:'supports',   icon:'🦵', desc:'Neoprene knee brace with adjustable straps for ligament support and post-surgery recovery.',              material:'Neoprene',         size:'S/M/L/XL',          sterile:'Non-Sterile', moq:'10 units', spec:'Adjustable Strap',       packaging:'Individual Box'},
+  {id:18, name:'Cervical Collar (Soft)',   cat:'supports',   icon:'🔵', desc:'Soft foam cervical collar for neck pain relief, cervical spondylosis, and post-injury immobilization.',   material:'Foam / Cotton',    size:'Regular / Large',   sterile:'Non-Sterile', moq:'10 units', spec:'Soft Foam',              packaging:'Individual Bag'},
+  {id:19, name:'Lumbar Sacral Belt',       cat:'supports',   icon:'🔶', desc:'Rigid lumbar belt for lower back pain, disc herniation, and post-surgical lumbar support.',              material:'Cotton / Steel Stay', size:'S/M/L/XL/XXL',   sterile:'Non-Sterile', moq:'5 units',  spec:'Steel Stays Included',  packaging:'Individual Box'},
+  {id:20, name:'Walking Crutches (Axillary)', cat:'rehab',   icon:'🏃', desc:'Aluminium adjustable axillary crutches for mobility support during orthopedic recovery.',              material:'Aluminium',        size:'Adjustable 135–160cm', sterile:'N/A',        moq:'2 pairs',  spec:'Height Adjustable',     packaging:'Pair / Carton'},
+  {id:21, name:'Abdominal Binder',         cat:'garments',   icon:'🩱', desc:'Post-surgical abdominal compression binder for hernia support, C-section recovery, and abdominal toning.', material:'Cotton / Elastic', size:'S/M/L/XL/XXL',  sterile:'Non-Sterile', moq:'10 units', spec:'Hook & Eye Closure',    packaging:'Individual Pack'},
 ];
 
 // ── PRODUCT DATA & REST API STATE ──
@@ -1553,45 +1564,38 @@ let currentFilter = 'all';
 let currentSearchQuery = '';
 let activeDetailProductId = null;
 
-// REST API configuration
-// const API_URL = "http://localhost:5000/api";
 const API_URL = "https://hr-work.onrender.com";
 
-// Asynchronous fetch adapter to load catalogue data from Express backend
 async function loadProducts() {
   try {
-    const res = await fetch(`${API_URL}/products`);
+    const res = await fetch(`${API_URL}/api/products`);
     if (!res.ok) throw new Error("API response error");
     const data = await res.json();
-    
-    // Check if data actually changed to avoid unnecessary re-renders
+
     const hasChanged = JSON.stringify(products) !== JSON.stringify(data);
     if (hasChanged) {
       products = data;
-      
-      // Fall back to defaults if server returns empty list
+
       if (products.length === 0) {
         products = [...DEFAULT_PRODUCTS];
       }
-      
+
       applyFilters();
       updateHeroCards();
-      
-      // Live updates to the detail page!
+
       if (activeDetailProductId !== null) {
         const stillExists = products.some(p => p.id === activeDetailProductId);
         if (stillExists) {
           showProductDetail(activeDetailProductId, true);
         } else {
-          showToast(`⚠️ "${document.getElementById('breadcrumb-name')?.textContent || 'The viewed product'}" is no longer available.`);
+          showToast(`⚠️ This product is no longer available.`);
           activeDetailProductId = null;
           showPage('products');
         }
       }
     }
   } catch (err) {
-    console.error("Express API loading error, using local fallback:", err);
-    // Fallback to local storage if API is offline
+    console.error("API error, using local fallback:", err);
     const stored = localStorage.getItem('hrwork_products');
     if (stored) {
       try { products = JSON.parse(stored); }
@@ -1608,8 +1612,8 @@ async function loadProducts() {
 // Initial load
 loadProducts();
 
-// Smart polling to maintain real-time sync with database updates
-setInterval(loadProducts, 5000);
+// Poll every 60 seconds
+setInterval(loadProducts, 60000);
 
 // ── PREMIUM GALLERY STATE & CONTROL ──
 let detailSlideIndex = 0;
@@ -1630,21 +1634,17 @@ function goToDetailSlide(index) {
   if (index < 0) index = detailSlideCount - 1;
   if (index >= detailSlideCount) index = 0;
   detailSlideIndex = index;
-  
+
   const slider = document.querySelector('.detail-gallery-slider');
   if (slider) {
     slider.style.transform = `translateX(-${detailSlideIndex * 100}%)`;
   }
-  
-  // Update dots
-  const dots = document.querySelectorAll('.gallery-dot');
-  dots.forEach((dot, idx) => {
+
+  document.querySelectorAll('.gallery-dot').forEach((dot, idx) => {
     dot.classList.toggle('active', idx === detailSlideIndex);
   });
-  
-  // Update thumbnails
-  const thumbs = document.querySelectorAll('.detail-thumb');
-  thumbs.forEach((thumb, idx) => {
+
+  document.querySelectorAll('.detail-thumb').forEach((thumb, idx) => {
     thumb.classList.toggle('active', idx === detailSlideIndex);
   });
 }
@@ -1662,9 +1662,7 @@ function prevDetailSlide(e) {
 function startDetailAutoSlide() {
   stopDetailAutoSlide();
   if (detailSlideCount > 1) {
-    detailAutoSlideInterval = setInterval(() => {
-      nextDetailSlide();
-    }, 4000);
+    detailAutoSlideInterval = setInterval(() => nextDetailSlide(), 4000);
   }
 }
 
@@ -1681,45 +1679,51 @@ function selectSizePill(el, size) {
   const selectedPills = container.querySelectorAll('.size-pill.selected');
   const selectedSizes = Array.from(selectedPills).map(pill => pill.dataset.size);
   const sizeInput = document.getElementById('df-size');
-  if (sizeInput) {
-    sizeInput.value = selectedSizes.join(' / ');
-  }
+  if (sizeInput) sizeInput.value = selectedSizes.join(' / ');
 }
 
 // ── DYNAMIC HERO IMAGES ──
 function updateHeroCards() {
-  const lapa = products.find(p => p.name.includes('Laparoscopic') || p.cat === 'specialty');
-  if (lapa && Array.isArray(lapa.images) && lapa.images.length > 0) {
-    const iconContainer = document.querySelector('.hero-visual .hero-card:nth-child(1) .hero-card-icon');
-    if (iconContainer) iconContainer.innerHTML = `<img src="${lapa.images[0]}" style="width:50px;height:50px;object-fit:cover;border-radius:10px;display:block;">`;
+  const knee = products.find(p => p.cat === 'supports');
+  if (knee && Array.isArray(knee.images) && knee.images.length > 0) {
+    const el = document.querySelector('.hero-visual .hero-card:nth-child(1) .hero-card-icon');
+    if (el) el.innerHTML = `<img src="${knee.images[0]}" style="width:50px;height:50px;object-fit:cover;border-radius:10px;display:block;">`;
   }
-  
-  const gen = products.find(p => p.cat === 'general');
-  if (gen && Array.isArray(gen.images) && gen.images.length > 0) {
-    const iconContainer = document.querySelector('.hero-visual .hero-card:nth-child(2) .hero-card-icon');
-    if (iconContainer) iconContainer.innerHTML = `<img src="${gen.images[0]}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;display:block;">`;
-  }
-  
+
   const ortho = products.find(p => p.cat === 'orthopedic');
   if (ortho && Array.isArray(ortho.images) && ortho.images.length > 0) {
-    const iconContainer = document.querySelector('.hero-visual .hero-card:nth-child(3) .hero-card-icon');
-    if (iconContainer) iconContainer.innerHTML = `<img src="${ortho.images[0]}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;display:block;">`;
+    const el = document.querySelector('.hero-visual .hero-card:nth-child(2) .hero-card-icon');
+    if (el) el.innerHTML = `<img src="${ortho.images[0]}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;display:block;">`;
+  }
+
+  const rehab = products.find(p => p.cat === 'rehab');
+  if (rehab && Array.isArray(rehab.images) && rehab.images.length > 0) {
+    const el = document.querySelector('.hero-visual .hero-card:nth-child(3) .hero-card-icon');
+    if (el) el.innerHTML = `<img src="${rehab.images[0]}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;display:block;">`;
   }
 }
 
 function getLabel(cat) {
-  const map = {general:'General Surgical',orthopedic:'Orthopedic',disposables:'Disposables',ot:'OT Equipment',diagnostic:'Diagnostic',specialty:'Specialty'};
+  const map = {
+    supports: 'Supports & Braces',
+    orthopedic: 'Orthopedic',
+    rehab: 'Products',
+    garments: 'Medical Garments'
+  };
   return map[cat] || cat;
 }
 
 function renderProducts(list) {
   const grid = document.getElementById('productGrid');
   if (!grid) return;
-  if (list.length === 0) { grid.innerHTML = '<p style="color:var(--gray-400);font-size:15px;grid-column:1/-1;padding:2rem 0">No products found. Try a different search or filter.</p>'; return; }
+  if (list.length === 0) {
+    grid.innerHTML = '<p style="color:var(--gray-400);font-size:15px;grid-column:1/-1;padding:2rem 0">No products found. Try a different search or filter.</p>';
+    return;
+  }
   grid.innerHTML = list.map((p, i) => {
     const hasImages = Array.isArray(p.images) && p.images.length > 0;
-    const mediaHtml = hasImages 
-      ? `<img src="${p.images[0]}" style="width:100%;height:100%;object-fit:cover;display:block;">` 
+    const mediaHtml = hasImages
+      ? `<img src="${p.images[0]}" style="width:100%;height:100%;object-fit:cover;display:block;">`
       : p.icon;
     return `
       <div class="product-card" style="animation-delay:${i*0.05}s" onclick="showProductDetail(${p.id})">
@@ -1731,7 +1735,7 @@ function renderProducts(list) {
           <div class="product-name">${p.name}</div>
           <p class="product-desc">${p.desc}</p>
           <div class="product-foot">
-            <span class="product-spec">MOQ: ${p.moq}</span>
+            <span class="product-spec">MOQ: ${p.moq || '—'}</span>
             <button class="btn-enquire" onclick="event.stopPropagation();openProductModal('${p.name}')">Enquire Now</button>
           </div>
         </div>
@@ -1744,13 +1748,12 @@ function filterProducts(cat) {
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   const btns = document.querySelectorAll('.filter-btn');
-  const map = ['all','supports & braces','general','orthopedic','disposables','ot','diagnostic','specialty'];
+  const map = ['all', 'supports', 'orthopedic', 'rehab', 'garments'];
   const idx = map.indexOf(cat);
   if (btns[idx]) btns[idx].classList.add('active');
   applyFilters();
 }
 
-// Search
 function searchProducts() {
   currentSearchQuery = document.getElementById('searchInput').value.toLowerCase();
   applyFilters();
@@ -1759,7 +1762,10 @@ function searchProducts() {
 function applyFilters() {
   let list = products;
   if (currentFilter !== 'all') list = list.filter(p => p.cat === currentFilter);
-  if (currentSearchQuery) list = list.filter(p => p.name.toLowerCase().includes(currentSearchQuery) || p.desc.toLowerCase().includes(currentSearchQuery));
+  if (currentSearchQuery) list = list.filter(p =>
+    p.name.toLowerCase().includes(currentSearchQuery) ||
+    (p.desc || '').toLowerCase().includes(currentSearchQuery)
+  );
   renderProducts(list);
 }
 
@@ -1768,7 +1774,6 @@ function showProductDetail(id, isLiveUpdate = false) {
   const p = products.find(x => x.id === id);
   if (!p) return;
 
-  // Retrieve existing form values if doing a live re-bind to prevent wiping them out
   const oldName = isLiveUpdate ? (document.getElementById('df-name')?.value || '') : '';
   const oldOrg = isLiveUpdate ? (document.getElementById('df-org')?.value || '') : '';
   const oldPhone = isLiveUpdate ? (document.getElementById('df-phone')?.value || '') : '';
@@ -1781,22 +1786,22 @@ function showProductDetail(id, isLiveUpdate = false) {
 
   const hasImages = Array.isArray(p.images) && p.images.length > 0;
   const galleryImages = hasImages ? p.images : [];
-  
+
   let slidesHtml = '';
   let dotsHtml = '';
   let thumbsHtml = '';
-  
+
   if (hasImages) {
     slidesHtml = galleryImages.map(img => `
       <div class="detail-gallery-slide">
         <img src="${img}" alt="${p.name}">
       </div>
     `).join('');
-    
+
     dotsHtml = galleryImages.map((_, idx) => `
       <div class="gallery-dot ${idx === 0 ? 'active' : ''}" onclick="goToDetailSlide(${idx})"></div>
     `).join('');
-    
+
     thumbsHtml = galleryImages.map((img, idx) => `
       <div class="detail-thumb ${idx === 0 ? 'active' : ''}" onclick="goToDetailSlide(${idx})">
         <img src="${img}" alt="Thumbnail ${idx + 1}">
@@ -1828,10 +1833,10 @@ function showProductDetail(id, isLiveUpdate = false) {
   if (Array.isArray(p.sizes) && p.sizes.length > 0) {
     sizeList = p.sizes;
   } else if (p.size) {
-    sizeList = p.size.split('/').map(s => s.trim()).filter(s => s !== '');
+    sizeList = p.size.split(/\s*\/\s*|\s*,\s*/).map(s => s.trim()).filter(s => s !== '');
   }
   if (sizeList.length === 0) sizeList = ['Universal'];
-  
+
   const sizePillsHtml = `
     <div class="size-pill-container">
       ${sizeList.map(sz => `
@@ -1859,7 +1864,7 @@ function showProductDetail(id, isLiveUpdate = false) {
       <p class="detail-desc">${p.desc} This instrument meets all required quality standards and is supplied with full documentation including certificate of conformity.</p>
       <table class="spec-table">
         <tr><td>Available Sizes</td><td>${sizePillsHtml}</td></tr>
-        </table>
+      </table>
       <div class="detail-form">
         <h3>Request a Quote for This Product</h3>
         <div class="form-row">
@@ -1880,7 +1885,6 @@ function showProductDetail(id, isLiveUpdate = false) {
     </div>
   `;
 
-  // Restore form values
   if (isLiveUpdate) {
     if (document.getElementById('df-name')) document.getElementById('df-name').value = oldName;
     if (document.getElementById('df-org')) document.getElementById('df-org').value = oldOrg;
@@ -1890,30 +1894,26 @@ function showProductDetail(id, isLiveUpdate = false) {
     if (document.getElementById('df-size')) document.getElementById('df-size').value = oldSize;
   }
 
-  // Initialize gallery state and touch swipe event listeners
   initDetailGallery(galleryImages.length);
-  
+
   const galleryContainer = document.querySelector('.detail-gallery-container');
   if (galleryContainer && galleryImages.length > 1) {
     galleryContainer.addEventListener('mouseenter', stopDetailAutoSlide);
     galleryContainer.addEventListener('mouseleave', startDetailAutoSlide);
-    
+
     let touchStartX = 0;
     let touchEndX = 0;
-    
+
     galleryContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
       stopDetailAutoSlide();
     }, {passive: true});
-    
+
     galleryContainer.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       const swipeThreshold = 50;
-      if (touchEndX < touchStartX - swipeThreshold) {
-        nextDetailSlide();
-      } else if (touchEndX > touchStartX + swipeThreshold) {
-        prevDetailSlide();
-      }
+      if (touchEndX < touchStartX - swipeThreshold) nextDetailSlide();
+      else if (touchEndX > touchStartX + swipeThreshold) prevDetailSlide();
       startDetailAutoSlide();
     }, {passive: true});
   }
@@ -1921,8 +1921,8 @@ function showProductDetail(id, isLiveUpdate = false) {
   const related = products.filter(x => x.cat === p.cat && x.id !== id).slice(0, 4);
   document.getElementById('relatedGrid').innerHTML = related.map(r => {
     const hasRelImg = Array.isArray(r.images) && r.images.length > 0;
-    const relMediaHtml = hasRelImg 
-      ? `<img src="${r.images[0]}" style="width:100%;height:100%;object-fit:cover;display:block;">` 
+    const relMediaHtml = hasRelImg
+      ? `<img src="${r.images[0]}" style="width:100%;height:100%;object-fit:cover;display:block;">`
       : r.icon;
     return `
       <div class="product-card" onclick="showProductDetail(${r.id})" style="cursor:pointer">
@@ -1930,7 +1930,10 @@ function showProductDetail(id, isLiveUpdate = false) {
         <div class="product-body">
           <div class="product-name">${r.name}</div>
           <p class="product-desc">${r.desc}</p>
-          <div class="product-foot"><span class="product-spec">MOQ: ${r.moq}</span><button class="btn-enquire" onclick="event.stopPropagation();openProductModal('${r.name}')">Enquire</button></div>
+          <div class="product-foot">
+            <span class="product-spec">MOQ: ${r.moq || '—'}</span>
+            <button class="btn-enquire" onclick="event.stopPropagation();openProductModal('${r.name}')">Enquire</button>
+          </div>
         </div>
       </div>
     `;
@@ -1938,7 +1941,7 @@ function showProductDetail(id, isLiveUpdate = false) {
 
   if (!isLiveUpdate) {
     showPage('product-detail');
-    window.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 }
 
@@ -1950,12 +1953,10 @@ function submitDetailEnquiry() {
     return;
   }
   showToast('Enquiry submitted! We will contact you within 24 hours.');
-  if (document.getElementById('df-name')) document.getElementById('df-name').value = '';
-  if (document.getElementById('df-org')) document.getElementById('df-org').value = '';
-  if (document.getElementById('df-phone')) document.getElementById('df-phone').value = '';
-  if (document.getElementById('df-email')) document.getElementById('df-email').value = '';
-  if (document.getElementById('df-qty')) document.getElementById('df-qty').value = '';
-  if (document.getElementById('df-size')) document.getElementById('df-size').value = '';
+  ['df-name','df-org','df-phone','df-email','df-qty','df-size'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
   document.querySelectorAll('.size-pill.selected').forEach(pill => pill.classList.remove('selected'));
 }
 
@@ -1963,10 +1964,10 @@ function submitDetailEnquiry() {
 function showPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const el = document.getElementById('page-' + page);
-  if (el) { el.classList.add('active'); window.scrollTo({top:0, behavior:'smooth'}); }
-  if (page === 'products') { setTimeout(() => applyFilters(), 50); }
-  if (page === 'home') { updateHeroCards(); }
-  if (page !== 'product-detail') { activeDetailProductId = null; }
+  if (el) { el.classList.add('active'); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  if (page === 'products') setTimeout(() => applyFilters(), 50);
+  if (page === 'home') updateHeroCards();
+  if (page !== 'product-detail') activeDetailProductId = null;
   initFadeIns();
 }
 
@@ -1988,7 +1989,11 @@ function openProductModal(name) {
 function submitModal() {
   document.getElementById('modalFormWrap').style.display = 'none';
   document.getElementById('modalSuccess').style.display = 'block';
-  setTimeout(() => { closeModal(); document.getElementById('modalFormWrap').style.display = 'block'; document.getElementById('modalSuccess').style.display = 'none'; }, 3000);
+  setTimeout(() => {
+    closeModal();
+    document.getElementById('modalFormWrap').style.display = 'block';
+    document.getElementById('modalSuccess').style.display = 'none';
+  }, 3000);
 }
 function submitContactForm() {
   const name = document.getElementById('cf-name').value;
@@ -2024,18 +2029,19 @@ function showToast(msg) {
 // ── FADE IN OBSERVER ──
 function initFadeIns() {
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
   }, {threshold: 0.1});
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
 
-// Init
+// ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   initFadeIns();
-  applyFilters();
+  loadProducts();
   updateHeroCards();
 });
-
 </script>
 </body>
 </html>
