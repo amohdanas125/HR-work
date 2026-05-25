@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HR Work — Orthopedic Supports & Products</title>
-<meta name="description" content="Trusted supplier of orthopedic braces, supports, products, and medical garments for hospitals and clinics across India.">
-<meta name="keywords" content="orthopedic supports, knee brace, products, medical garments, lumbar belt, India">
+<meta name="description" content="Trusted supplier of orthopedic braces, supports, products, and Garments for hospitals and clinics across India.">
+<meta name="keywords" content="orthopedic supports, knee brace, products, Garments, lumbar belt, India">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -250,7 +250,9 @@ nav.scrolled { background: rgba(6,21,41,0.99); box-shadow: 0 4px 30px rgba(0,0,0
 .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-top: 4px; display: block; }
 
 .hero-visual {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
   animation: fadeInRight 0.9s 0.2s ease both;
   margin-top: -16rem;
 }
@@ -259,12 +261,17 @@ nav.scrolled { background: rgba(6,21,41,0.99); box-shadow: 0 4px 30px rgba(0,0,0
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.2rem 1.5rem;
   backdrop-filter: blur(10px);
   transition: all 0.3s;
+
+  /* Add these */
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 .hero-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
-.hero-card:first-child { grid-column: span 2; display: flex; align-items: center; gap: 16px; }
+.hero-card:first-child { grid-column: span 1; display: flex; align-items: center; gap: 16px; }
 .hero-card-icon { font-size: 2rem; margin-bottom: 12px; }
 .hero-card:first-child .hero-card-icon { margin-bottom: 0; font-size: 2.4rem; }
 .hero-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-light); margin-bottom: 4px; }
@@ -1081,9 +1088,9 @@ footer {
       <ul class="nav-dropdown-menu">
         <li><a href="#" onclick="filterProducts('all');showPage('products')">All Products</a></li>
         <li><a href="#" onclick="filterProducts('supports');showPage('products')">Supports & Braces</a></li>
-        <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic Instruments</a></li>
+        <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic Products</a></li>
         <li><a href="#" onclick="filterProducts('rehab');showPage('products')">Products</a></li>
-        <li><a href="#" onclick="filterProducts('garments');showPage('products')">Medical Garments</a></li>
+        <li><a href="#" onclick="filterProducts('garments');showPage('products')">Garments</a></li>
       </ul>
     </li>
     <li><a href="#" onclick="showPage('contact')">Contact</a></li>
@@ -1122,7 +1129,7 @@ footer {
         >
         <!-- END REPLACEMENT -->
         <p class="hero-subtitle">
-          India's trusted supplier of orthopedic braces, supports, products, and medical garments — serving hospitals and clinics nationwide.
+          India's trusted supplier of orthopedic braces, supports, products, and Garments — serving hospitals and clinics nationwide.
         </p>
         <div class="hero-btns">
           <a href="#" class="btn-primary" onclick="showPage('products')">Browse Products →</a>
@@ -1145,21 +1152,27 @@ footer {
         </div>
         <div class="hero-card">
           <div class="hero-card-icon">🦴</div>
+          <div>
           <div class="hero-card-label">Category</div>
           <div class="hero-card-title">Orthopedic</div>
-          <div class="hero-card-sub">8+ instruments</div>
+          <div class="hero-card-sub">8+ Products</div>
+          </div>
         </div>
         <div class="hero-card">
           <div class="hero-card-icon">🏋️</div>
+          <div>
           <div class="hero-card-label">Category</div>
-          <div class="hero-card-title">/div>
+          <div class="hero-card-title"></div>
           <div class="hero-card-sub">10+ products</div>
+          </div>
         </div>
         <div class="hero-card">
           <div class="hero-card-icon">📦</div>
+          <div>
           <div class="hero-card-label">Ready to Ship</div>
           <div class="hero-card-title">Bulk Orders</div>
           <div class="hero-card-sub">Pan-India delivery</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1182,7 +1195,7 @@ footer {
         <div class="why-card fade-in">
           <div class="why-icon">📋</div>
           <div class="why-title">Wide Product Range</div>
-          <p class="why-text">10+ products across supports, braces, aids, and medical garments — covering every stage of orthopedic recovery and patient care.</p>
+          <p class="why-text">10+ products across supports, braces, aids, and Garments — covering every stage of orthopedic recovery and patient care.</p>
         </div>
         <div class="why-card fade-in">
           <div class="why-icon">🏨</div>
@@ -1217,7 +1230,7 @@ footer {
         </a>
         <a class="cat-card fade-in" href="#" onclick="filterProducts('orthopedic');showPage('products')">
           <div class="cat-icon">🦴</div>
-          <div class="cat-title">Orthopedic Instruments</div>
+          <div class="cat-title">Orthopedic Products</div>
           <p class="cat-desc">Bone chisels, mallets, reamers, reduction forceps, and specialized orthopedic surgical tools for precision bone and joint procedures.</p>
           <span class="cat-link">View Products →</span>
         </a>
@@ -1229,7 +1242,7 @@ footer {
         </a>
         <a class="cat-card fade-in" href="#" onclick="filterProducts('garments');showPage('products')">
           <div class="cat-icon">🩱</div>
-          <div class="cat-title">Medical Garments</div>
+          <div class="cat-title">Garments</div>
           <p class="cat-desc">Compression stockings, abdominal binders, post-surgical garments, and therapeutic wraps designed for comfort, recovery, and medical support.</p>
           <span class="cat-link">View Products →</span>
         </a>
@@ -1252,9 +1265,9 @@ footer {
           <div class="section-label" style="color:var(--gold-light)">About Us</div>
           <h2 class="section-title" style="color:white">Built on Quality, Trusted by Surgeons &amp; Physiotherapists</h2>
           <p class="about-body" style="color:rgba(255,255,255,0.65)">
-            HR Work has grown from a regional distributor to one of India's most trusted suppliers of orthopedic supports, products, and medical garments. We combine innovation, quality, and reliability to deliver products that meet the highest standards of medical excellence.
+            HR Work has grown from a regional distributor to one of India's most trusted suppliers of orthopedic supports, products, and Garments. We combine innovation, quality, and reliability to deliver products that meet the highest standards of medical excellence.
           </p>
-          <ul class="about-list">
+          <ul class="about-list" style="color: #ece6e6;">
             <li><span>Direct partnerships with leading Indian &amp; international manufacturers</span></li>
             <li><span>Dedicated after-sales support and product training for clinical staff</span></li>
             <li><span>Custom procurement solutions for hospitals, nursing homes, and physiotherapy centers</span></li>
@@ -1289,7 +1302,7 @@ footer {
               <span style="color:rgba(255,255,255,0.4)">Surgical Products</span>
             </div>
           </a>
-          <p>Trusted supplier of high-quality orthopedic supports, products, and medical garments for hospitals, nursing homes, and physiotherapy centers across India.</p>
+          <p>Trusted supplier of high-quality orthopedic supports, products, and Garments for hospitals, nursing homes, and physiotherapy centers across India.</p>
           <!-- <div class="social-links">
             <a class="social-link" href="#" title="LinkedIn">in</a>
             <a class="social-link" href="#" title="Facebook">f</a>
@@ -1301,9 +1314,9 @@ footer {
           <h4>Products</h4>
           <ul>
             <li><a href="#" onclick="filterProducts('supports');showPage('products')">Supports &amp; Braces</a></li>
-            <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic Instruments</a></li>
+            <li><a href="#" onclick="filterProducts('orthopedic');showPage('products')">Orthopedic Products</a></li>
             <li><a href="#" onclick="filterProducts('rehab');showPage('products')">Products</a></li>
-            <li><a href="#" onclick="filterProducts('garments');showPage('products')">Medical Garments</a></li>
+            <li><a href="#" onclick="filterProducts('garments');showPage('products')">Garments</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -1319,12 +1332,12 @@ footer {
             <li><a href="#">📍 Kanpur , India</a></li>
             <li><a href="tel:+91 512-4221204">📞 +91 512-4221204</a></li>
             <li><a href="mailto:healthrecoverywork@gmail.com">✉ healthrecoverywork@gmail</a></li>
-            <li><a href="#">⏰ Mon–Sat, 9AM–6PM</a></li>
+            <li><a href="#">⏰ Mon–Sat, 10AM–6PM</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved.</span>
+        <span>Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2023 HR Work Surgical Products. All rights reserved.</span>
       </div>
     </div>
   </footer>
@@ -1348,15 +1361,15 @@ footer {
       <div class="filter-bar" id="filterBar">
         <button class="filter-btn active" onclick="filterProducts('all')">All Products</button>
         <button class="filter-btn" onclick="filterProducts('supports')">Supports &amp; Braces</button>
-        <button class="filter-btn" onclick="filterProducts('orthopedic')">Orthopedic Instruments</button>
+        <button class="filter-btn" onclick="filterProducts('orthopedic')">Orthopedic Products</button>
         <button class="filter-btn" onclick="filterProducts('rehab')">Products</button>
-        <button class="filter-btn" onclick="filterProducts('garments')">Medical Garments</button>
+        <button class="filter-btn" onclick="filterProducts('garments')">Garments</button>
       </div>
       <div class="product-grid" id="productGrid"></div>
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2023 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact</a>
   </footer>
 </div>
 
@@ -1382,7 +1395,7 @@ footer {
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px;margin-top:4rem">
-    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('products')" style="color:var(--gold-light);text-decoration:none">All Products</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2023 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('products')" style="color:var(--gold-light);text-decoration:none">All Products</a>
   </footer>
 </div>
 
@@ -1431,7 +1444,7 @@ footer {
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact Us</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2023 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a> · <a href="#" onclick="showPage('contact')" style="color:var(--gold-light);text-decoration:none">Contact Us</a>
   </footer>
 </div>
 
@@ -1464,7 +1477,7 @@ footer {
           </div>
           <div class="contact-detail">
             <div class="contact-detail-icon">⏰</div>
-            <div><h4>Business Hours</h4><p>Monday – Saturday<br>9:00 AM – 6:00 PM IST</p></div>
+            <div><h4>Business Hours</h4><p>Monday – Saturday<br>10:00 AM – 6:00 PM IST</p></div>
           </div>
           <div class="map-placeholder" style="padding:0; overflow:hidden; border-radius:12px;">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.44021468408!2d80.3934848752073!3d26.44153547693117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c40eee54d8ea9%3A0xc89e4673b4ba6dda!2sTila%20Lane%2C%20Asharfabad%2C%20Jajmau%2C%20Kanpur%2C%20Uttar%20Pradesh%20209861!5e0!3m2!1sen!2sin!4v1779461559790!5m2!1sen!2sin" style="width:100%; height:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1485,9 +1498,9 @@ footer {
               <select id="cf-product">
                 <option value="">Select category...</option>
                 <option>Supports &amp; Braces</option>
-                <option>Orthopedic Instruments</option>
+                <option>Orthopedic Products</option>
                 <option>Products</option>
-                <option>Medical Garments</option>
+                <option>Garments</option>
                 <option>Mixed / Multiple Categories</option>
               </select>
             </div>
@@ -1505,7 +1518,7 @@ footer {
     </div>
   </section>
   <footer style="background:var(--navy-dark);color:rgba(255,255,255,0.5);padding:24px 2rem;text-align:center;font-size:13px">
-    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2024 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a>
+    Registration No.: HRWO-Kanpur-UP/M/MD/029810 | © 2023 HR Work Surgical Products. All rights reserved. · <a href="#" onclick="showPage('home')" style="color:var(--gold-light);text-decoration:none">Home</a>
   </footer>
 </div>
 
@@ -1564,7 +1577,7 @@ let currentFilter = 'all';
 let currentSearchQuery = '';
 let activeDetailProductId = null;
 
-const API_URL = "https://hr-work.onrender.com";
+const API_URL = "https://hr-work-mamy.onrender.com";
 
 async function loadProducts() {
   try {
@@ -1708,7 +1721,7 @@ function getLabel(cat) {
     supports: 'Supports & Braces',
     orthopedic: 'Orthopedic',
     rehab: 'Products',
-    garments: 'Medical Garments'
+    garments: 'Garments'
   };
   return map[cat] || cat;
 }
